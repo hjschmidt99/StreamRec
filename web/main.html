@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dnload</title>
+
+    <!-- Include eel.js - note this file doesn't exist in the 'web' directory -->
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="utils.js"></script>
+    <script type="text/javascript">
+      window.onload = function() { loadParams(); }
+      window.onbeforeunload = function() { saveParams(); }
+
+      async function saveParams() {
+        var x = getParams();
+        await eel.saveParams(x);
+      }
+      
+      async function loadParams() {
+        x = await eel.loadParams()();
+        setParams(x);
+      }
+      
+      async function reload() {
+        await saveParams();
+        await loadParams();
+      }
+
+      async function doStart() {
+        addMru(txtDir);
+        addMru(txtName1);
+        addMru(txtName2);
+        addMru(txtUrl);
+        await eel.doStart(selMode.value, txtDir.value, txtName1.value, txtName2.value, txtUrl.value);
+        if (chkClearUrl.checked) 
+          txtUrl.value = "";
+      }
+
+      async function doCmd(cmd, p = null) {
+        await eel.doCmd(cmd, p);
+      }
+
+      eel.expose(clipboardChanged);
+      function clipboardChanged(x) {
+        if (x.startsWith("http") || x.startsWith("rtmp"))
+          txtUrl.value = x
+        else
+          txtName1.value = x;
+      }
+
+      function resize() {
+        txta.style.height = "" + (window.innerHeight - txta.offsetTop - 2 * txta.offsetLeft) + "px"
+      }
+      
+    </script>
+  </head>
+
+  <body id="body" style="overflow:hidden;padding-right:8px;background-color: lightgray;" onresize="resize()">
+    <style>
+      * { font-family:arial;font-size:10pt; }
+      .max { width:100%; padding:2px; }
+      .btn1 { width:100%; height:30px; font-weight:bold; color:gold; background-color:red; }
+      .btn { width:80px; height:26px; }
+      .hide { display:none }
+      .sel { width:100%; padding:2px; }
+      .img { width:24px; height:24px; margin: auto auto auto auto; display: block; }
+      table { border-collapse:separate; border-spacing:3px 3px; }
+    </style>
+    <table width="100%"><tr>
+        <td width="100px">Mode</td>
+        <td width="70px"><image class="img" title="refresh list" onclick="reload()" src="refresh.png" /></td>
+        <td width="99%"><select id="selMode" class="sel" save="select"></select></td>
+        <td width="70px"><image class="img" title="show/hide console" onclick="doCmd('Console')" src="terminal.png" /></td>
+      </tr><tr>
+        <td>Dir</td>
+        <td><select id="txtDir_mru" class="max" save="mru" onchange="useMru(this)" onfocus="this.selectedIndex=-1" /></td>
+        <td colspan="2"><input type="text" id="txtDir" class="max" save="value" /></td>
+      </tr><tr>
+        <td>Name1</td>
+        <td><select id="txtName1_mru" class="max" save="mru" onchange="useMru(this)" onfocus="this.selectedIndex=-1" /></td>
+        <td colspan="2"><input type="text" id="txtName1" class="max" save="value" /></td>
+      </tr><tr>
+        <td>Name2</td>
+        <td><select id="txtName2_mru" class="max" save="mru" onchange="useMru(this)" onfocus="this.selectedIndex=-1" /></td>
+        <td colspan="2"><input type="text" id="txtName2" class="max" save="value" /></td>
+      </tr><tr>
+        <td>URL</td>
+        <td><select id="txtUrl_mru" class="max" save="mru" onchange="useMru(this)" onfocus="this.selectedIndex=-1" /></td>
+        <td colspan="2"><input type="text" id="txtUrl" class="max" save="value" /></td>
+      </tr><tr>
+        <td colspan="2"><button class="btn1" onclick="doStart()">Start</button></td>
+        <td colspan="2">
+          <button class="btn" onclick="doCmd('CmdFile')">CmdFile</button>
+          <button class="btn" onclick="doCmd('ShowLog')">ShowLog</button>&nbsp;
+          <input type="checkbox" id="chkClearUrl" save="checked" />autoClearURL&nbsp;&nbsp;
+          <input type="checkbox" id="chkClipmon" save="checked" onclick="doCmd('Clipmon', this.checked)" />pollClipboard&nbsp;&nbsp;
+        </td>
+      </tr></table>
+      Info:<br><textarea id="txta" class="max" style="resize:none;height:100px;"></textarea>
+  </body>
+</html>
