@@ -6,9 +6,10 @@ import traceback
 import urllib
 import datetime
 import win32gui, win32con
+import win32com.client
 import eel
 import clipboard
-import win32com.client
+import scheduler
 
 # console visibility
 conWin = win32gui.GetForegroundWindow()
@@ -30,8 +31,8 @@ xparam = {
     "x": 50,
     "y": 50, 
     "w": 400,
-    "h": 399,
-    "port": 8902,
+    "h": 400,
+    "port": 0,
     "txtDir_mru": ["D:\\Download\\Media"],
 }
 
@@ -58,7 +59,7 @@ def saveParams(x):
 def loadParams():
     xparam["selMode_values"] = getModes()
     xparam["selChan_values"] = getChannels()
-    print(json.dumps(xparam, indent=4))
+    dump(xparam)
     return xparam
 
 # get modes from cmd file
@@ -75,8 +76,8 @@ def getModes():
 
 # get channess from pls file
 def getChannels():
-    global chan
-    chan = {}
+    global channels
+    channels = {}
     if os.path.exists(fnpls):
         with open(fnpls, 'r') as f1:
             t = f1.read()
@@ -84,65 +85,45 @@ def getChannels():
         for x in t.split("\n"):
             a = x.split("=", 1)
             if len(a) == 2: pls[a[0]] = a[1]
-        #print(json.dumps(pls, indent=4))
         for i in range(1, int(len(pls.keys()) / 2)):
             k = f'Title{i}'
             v = f'File{i}'
-            #print(f'{i}  {k}  {v}')
             if k in pls.keys() and v in pls.keys(): 
-                chan[pls[k]] = pls[v]
-        #print(json.dumps(chan, indent=4))
-    return list(chan.keys())
+                channels[pls[k]] = pls[v]
+    return list(channels.keys())
+
+def dump(o):
+    print(json.dumps(o, indent=4))
 
 # makew string a valid filename
 def toFilename(s):
     s = s.replace("\r", "")
     s = s.replace("\n", " - ")
     s = s.replace("\t", " ")
-    s = s.replace("-  -", "-")
     s = s.replace("?", " ")
-    s = s.replace(":", " - ")
-    s = s.replace("\"", "'")
+    s = s.replace(":", "-")
+    s = s.replace("\"", "-")
+    s = s.replace("/", "-")
+    s = s.replace(".", "-")
+    s = s.replace(",", "-")
+    s = s.replace(";", "-")
     s = s.replace("  ", " ")
     return s.strip()
 
 # create task
 @eel.expose
-def doStart(mode, dir, name1, name2, url):
+def doCreate(chan, mode, start, end, title):
     try:
-        scheduler = win32com.client.Dispatch('Schedule.Service')
-        scheduler.Connect()
-        root_folder = scheduler.GetFolder('\\Record')
-        task_def = scheduler.NewTask(0)
-
-        # Create trigger
-        start_time = datetime.datetime.now() + datetime.timedelta(minutes=5)
-        TASK_TRIGGER_TIME = 1
-        trigger = task_def.Triggers.Create(TASK_TRIGGER_TIME)
-        trigger.StartBoundary = start_time.isoformat()
-
-        # Create action
-        TASK_ACTION_EXEC = 0
-        action = task_def.Actions.Create(TASK_ACTION_EXEC)
-        action.ID = 'DO NOTHING'
-        action.Path = 'cmd.exe'
-        action.Arguments = '/c "exit"'
-
-        # Set parameters
-        task_def.RegistrationInfo.Description = 'Test Task'
-        task_def.Settings.Enabled = True
-        task_def.Settings.StopIfGoingOnBatteries = False
-
-        # Register tas. If task already exists, it will be updated
-        TASK_CREATE_OR_UPDATE = 6
-        TASK_LOGON_NONE = 0
-        root_folder.RegisterTaskDefinition(
-            'Test Task',  # Task name
-            task_def,
-            TASK_CREATE_OR_UPDATE,
-            '',  # No user
-            '',  # No password
-            TASK_LOGON_NONE)
+        tFormatUi = "%d.%m.%Y %H:%M:%S"
+        url = channels[chan]
+        tstart = datetime.datetime.strptime(start, tFormatUi)
+        tend = datetime.datetime.strptime(end, tFormatUi)
+        taskname = toFilename(f'Rec_{tstart.isoformat}_{chan} - {title}')
+        destfile = f'{xparam["txtDir"]}\\{taskname}.ts'
+        folder = "\\Record"
+        xtool = "cmd.exe"
+        xargs = f'/s /c ""{fncmd}" {url} "{destfile}" mode_{mode}"'
+        scheduler.createTask(folder, taskname, tstart, tend, xtool, xargs)
     except:
         traceback.print_exc()
 
