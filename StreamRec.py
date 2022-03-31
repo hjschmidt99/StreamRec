@@ -3,10 +3,9 @@ import os
 import json
 import subprocess
 import traceback
-import urllib
+import urllib.request
 import datetime
 import win32gui, win32con
-import win32com.client
 import eel
 import clipboard
 import scheduler
@@ -33,7 +32,7 @@ xparam = {
     "w": 400,
     "h": 400,
     "port": 0,
-    "txtDir_mru": ["D:\\Download\\Media"],
+    "txtDir": "D:\\Download\\Media",
 }
 
 # load parameter file, always merge to xparam
@@ -101,6 +100,7 @@ def toFilename(s):
     s = s.replace("\n", " - ")
     s = s.replace("\t", " ")
     s = s.replace("?", " ")
+    s = s.replace("*", " ")
     s = s.replace(":", "-")
     s = s.replace("\"", "-")
     s = s.replace("/", "-")
@@ -114,11 +114,11 @@ def toFilename(s):
 @eel.expose
 def doCreate(chan, mode, start, end, title):
     try:
-        tFormatUi = "%d.%m.%Y %H:%M:%S"
+        tFormatUi = "%d.%m.%Y %H:%M"
         url = channels[chan]
         tstart = datetime.datetime.strptime(start, tFormatUi)
         tend = datetime.datetime.strptime(end, tFormatUi)
-        taskname = toFilename(f'Rec_{tstart.isoformat}_{chan} - {title}')
+        taskname = toFilename(f'Rec_{tstart.isoformat()}_{chan} - {title}')
         destfile = f'{xparam["txtDir"]}\\{taskname}.ts'
         folder = "\\Record"
         xtool = "cmd.exe"
@@ -127,13 +127,38 @@ def doCreate(chan, mode, start, end, title):
     except:
         traceback.print_exc()
 
+def paste():
+    c = clipboard.paste()
+    print(c)
+    eel.pasteResult(c)
+
 @eel.expose
-def doCmd(s, p = None):
+def doCmd(s, p):
     print(f'doCmd {s}, {p}')
-    if (s == "CmdFile"): subprocess.Popen(f'notepad.exe "{fncmd}"', shell=True)
-    if (s == "PlsFile"): subprocess.Popen(f'notepad.exe "{fnpls}"', shell=True)
+    cmd = None
+    log = ""
+    if (s == "CmdFile"): cmd = f'notepad.exe "{fncmd}"'
+    if (s == "PlsFile"): cmd = f'notepad.exe "{fnpls}"'
+    if (s == "Play"): cmd = f'start "" "{channels[p]}"'
+    if (s == "Tasks"): cmd = f'taskschd.msc'
+    if (s == "PlayList"): log = getPlayist(p)
     if (s == "Console"): showConsole(conToggle)
-    
+    if (s == "Paste"): paste()
+    if cmd:
+        log = f'doCmd ({s}, {p})\n{cmd}'
+        subprocess.Popen(cmd, shell=True)
+    if log: eel.prl(log)
+    #return(log)
+
+def getPlayist(chan):
+    url = channels[chan]
+    with urllib.request.urlopen(url) as response:
+        rsp = response.read()
+    s = f'\nChannel: {chan}\n{url}\n{rsp.decode("utf-8")}\n\n'
+    print(s)
+    return s
+
+
 eel.start('main.html', 
     cmdline_args=["--window-position=8000,0"], 
     port=xparam["port"], 
@@ -141,3 +166,4 @@ eel.start('main.html',
     size=(xparam["w"], xparam["h"]),
     block=True)
 
+#while (True): eel.sleep(1)

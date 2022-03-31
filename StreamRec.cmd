@@ -44,7 +44,8 @@ goto end
 goto end
 
 :mode_Test
-%ffmpeg1% -i %1 -c copy %2
+::%ffmpeg1% -i %1 -c copy %2
+calc.exe
 goto end
 
 :end

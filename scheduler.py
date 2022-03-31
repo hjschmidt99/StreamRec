@@ -19,9 +19,9 @@ def createTask(folder, taskname, tstart, tend, xtool, xargs):
         #task_def.Principal.LogonType = 3
         taskdef.Settings.Enabled = True
         taskdef.Settings.StopIfGoingOnBatteries = False
-        taskdef.Settings.taskDefinition.Settings.StartWhenAvailable = True
-        taskdef.Settings.taskDefinition.Settings.Hidden = False
-        taskdef.Settings.taskDefinition.Settings.DeleteExpiredTaskAfter = "PT2H" 
+        taskdef.Settings.StartWhenAvailable = True
+        taskdef.Settings.Hidden = False
+        taskdef.Settings.DeleteExpiredTaskAfter = "PT2H" 
 
         # Create trigger
         TASK_TRIGGER_TIME = 1
@@ -29,8 +29,8 @@ def createTask(folder, taskname, tstart, tend, xtool, xargs):
         trigger.Id = taskname
         trigger.StartBoundary = tstart.isoformat()
         trigger.EndBoundary = tend.isoformat()
-        dt = datetime.datetime.strftime(tend - tstart, "%HH%mM")
-        trigger.ExecutionTimeLimit = f'PT{dt}'
+        dm = int ((tend - tstart).seconds / 60)
+        trigger.ExecutionTimeLimit = f'PT{dm // 60}H{dm % 60}M'
 
         # Create action
         TASK_ACTION_EXEC = 0
