@@ -1,10 +1,12 @@
 {
     "x": 0,
-    "y": 396,
-    "w": 629,
-    "h": 503,
+    "y": 532,
+    "w": 511,
+    "h": 413,
     "port": 0,
     "txtDir": "D:\\Download\\Media",
+    "txtPlayer": "C:\\Program Files\\DAUM\\PotPlayer\\PotPlayerMini64.exe",
+    "txtOffset": "15",
     "selMode_values": [
         "Default",
         "AllStreams",
@@ -61,10 +63,10 @@
         "VISIT-X.tv",
         "ET"
     ],
-    "txtStart": "31.03.2022 22:00",
-    "txtEnd": "31.03.2022 22:05",
-    "txtTitle": "Test",
+    "txtStart": "01.04.2022 15:45",
+    "txtEnd": "01.04.2022 17:00",
+    "txtTitle": "hallo hessen",
     "chkClearUrl": false,
-    "selChan": "Das Erste (ARD)",
+    "selChan": "HR",
     "selMode": "Default"
 }

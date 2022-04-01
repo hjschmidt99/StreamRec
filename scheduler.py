@@ -2,6 +2,15 @@ import traceback
 import datetime
 import win32com.client
 
+def createTask(task):
+    createTask(    
+        task["folder"],
+        task["taskname"],
+        task["start"],
+        task["end"],
+        task["exe"],
+        task["args"])
+
 def createTask(folder, taskname, tstart, tend, xtool, xargs):
     try:
         scheduler = win32com.client.Dispatch('Schedule.Service')

@@ -4,7 +4,7 @@ import json
 import subprocess
 import traceback
 import urllib.request
-import datetime
+from datetime import datetime, timedelta
 import win32gui, win32con
 import eel
 import clipboard
@@ -32,8 +32,12 @@ xparam = {
     "w": 400,
     "h": 400,
     "port": 0,
-    "txtDir": "D:\\Download\\Media",
+    "txtDir": r"D:\Download\\Media",
+    "txtPlayer": r"C:\Program Files\DAUM\PotPlayer\PotPlayerMini64.exe",
+    "txtOffset": "15",
 }
+
+tFormatUi = "%d.%m.%Y %H:%M"
 
 # load parameter file, always merge to xparam
 fn = os.path.splitext(os.path.abspath(sys.argv[0]))[0]
@@ -94,7 +98,7 @@ def getChannels():
 def dump(o):
     print(json.dumps(o, indent=4))
 
-# makew string a valid filename
+# make string a valid filename
 def toFilename(s):
     s = s.replace("\r", "")
     s = s.replace("\n", " - ")
@@ -114,23 +118,54 @@ def toFilename(s):
 @eel.expose
 def doCreate(chan, mode, start, end, title):
     try:
-        tFormatUi = "%d.%m.%Y %H:%M"
         url = channels[chan]
-        tstart = datetime.datetime.strptime(start, tFormatUi)
-        tend = datetime.datetime.strptime(end, tFormatUi)
+        tstart = datetime.strptime(start, tFormatUi)
+        tend = datetime.strptime(end, tFormatUi)
+        now = datetime.now()
+        if tstart < now: tstart = now + timedelta(seconds=5)
+        if tend < now: tend = now + timedelta(minutes=6)
+        
         taskname = toFilename(f'Rec_{tstart.isoformat()}_{chan} - {title}')
         destfile = f'{xparam["txtDir"]}\\{taskname}.ts'
         folder = "\\Record"
-        xtool = "cmd.exe"
-        xargs = f'/s /c ""{fncmd}" {url} "{destfile}" mode_{mode}"'
-        scheduler.createTask(folder, taskname, tstart, tend, xtool, xargs)
+        exe = "cmd.exe"
+        args = f'/s /c ""{fncmd}" {url} "{destfile}" mode_{mode}"'
+
+        s = f'\nscheduled task:\n  folder: {folder}\n  taskname: {taskname}\n'
+        s += f'  start: {datetime.strftime(tstart, tFormatUi)}'
+        s += f'  endt: {datetime.strftime(tend, tFormatUi)}'
+        s += f'  exe: {exe}'
+        s += f'  args: {args}\n'
+        eel.prl(s)
+        
+        scheduler.createTask(folder, taskname, tstart, tend, exe, args)
     except:
         traceback.print_exc()
 
 def paste():
-    c = clipboard.paste()
-    print(c)
-    eel.pasteResult(c)
+    try:
+        s = clipboard.paste()
+        print(s)
+        # 12.04.2019 21:45–23:20 - ARD-alpha - Fawlty Towers
+        s = s.replace("–", "-")
+        a = s.split(" - ", 2)
+        if len(a) != 3: return
+        chan = a[1]
+        title = a[2]
+        dt = a[0].split(" ")
+        ta = dt[1].split("-")
+        t1 = f'{dt[0]} {ta[0]}'
+        t2 = f'{dt[0]} {ta[1]}'
+        tstart = datetime.strptime(t1, tFormatUi)
+        tend = datetime.strptime(t2, tFormatUi)
+        if ta[0] > ta[1] : tend += timedelta(days=1)
+        offset = timedelta(minutes=int(xparam["txtOffset"]))
+        tstart = datetime.strftime(tstart - offset, tFormatUi)
+        tend = datetime.strftime(tend + offset, tFormatUi)
+        eel.prl(f'\npaste from clipboard:\n{s}\n')
+        eel.pasteResult(tstart, tend, chan, title)
+    except:
+        traceback.print_exc()
 
 @eel.expose
 def doCmd(s, p):
@@ -139,7 +174,7 @@ def doCmd(s, p):
     log = ""
     if (s == "CmdFile"): cmd = f'notepad.exe "{fncmd}"'
     if (s == "PlsFile"): cmd = f'notepad.exe "{fnpls}"'
-    if (s == "Play"): cmd = f'start "" "{channels[p]}"'
+    if (s == "Play"): cmd = f'"{xparam["txtPlayer"]}" "{channels[p]}"'
     if (s == "Tasks"): cmd = f'taskschd.msc'
     if (s == "PlayList"): log = getPlayist(p)
     if (s == "Console"): showConsole(conToggle)
