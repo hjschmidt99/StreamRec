@@ -1,8 +1,8 @@
 {
     "x": 0,
-    "y": 532,
-    "w": 511,
-    "h": 413,
+    "y": 524,
+    "w": 472,
+    "h": 421,
     "port": 0,
     "txtDir": "D:\\Download\\Media",
     "txtPlayer": "C:\\Program Files\\DAUM\\PotPlayer\\PotPlayerMini64.exe",
@@ -63,10 +63,10 @@
         "VISIT-X.tv",
         "ET"
     ],
-    "txtStart": "01.04.2022 15:45",
-    "txtEnd": "01.04.2022 17:00",
-    "txtTitle": "hallo hessen",
+    "txtStart": "02.04.2022 22:10",
+    "txtEnd": "03.04.2022 01:15",
+    "txtTitle": "either",
     "chkClearUrl": false,
-    "selChan": "HR",
+    "selChan": "SWR BW",
     "selMode": "Default"
 }
