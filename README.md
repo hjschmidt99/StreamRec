@@ -34,6 +34,8 @@ e.g.<br>
 
 TVBrowser configuration for the clipboard plugin:
 
+
+
 <textarea rows=1 style="width:100%;overflow:scroll;white-space:nowrap;">{leadingZero(start_day,"2")}.{leadingZero(start_month,"2")}.{start_year} {leadingZero(start_hour,"2")}:{leadingZero(start_minute,"2")}-{leadingZero(end_hour,"2")}:{leadingZero(end_minute,"2")} - {channel_name} - {title}</textarea>
 
 Clicking on the Start label will 

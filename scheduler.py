@@ -44,11 +44,11 @@ def createTask(folder, taskname, tstart, tend, xtool, xargs):
         # Create action
         TASK_ACTION_EXEC = 0
         action = taskdef.Actions.Create(TASK_ACTION_EXEC)
-        action.ID = 'DO NOTHING'
+        action.ID = 'Record'
         action.Path = xtool
         action.Arguments = xargs
 
-        # Register tas. If task already exists, it will be updated
+        # Register task. If task already exists, it will be updated
         TASK_CREATE_OR_UPDATE = 6
         TASK_LOGON_NONE = 0
         rootfolder.RegisterTaskDefinition(
