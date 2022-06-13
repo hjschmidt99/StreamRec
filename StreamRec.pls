@@ -28,7 +28,7 @@ File8=https://mcdn.wdr.de/wdr/wdrfs/de/master.m3u8
 Title9=SWR BW
 File9=https://swrbwd-hls.akamaized.net/hls/live/2018672/swrbwd/master.m3u8
 
-Title10=BR S�d
+Title10=BR Süd
 File10a=https://brcdn.vo.llnwd.net/br/fs/bfs_sued/hls/de/master_1280p_3628.m3u8
 File10=https://mcdn.br.de/br/fs/bfs_sued/hls/de/master.m3u8
 

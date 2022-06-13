@@ -45,12 +45,6 @@
       function resize() {
         txta.style.height = (window.innerHeight - txta.offsetTop - 2 * txta.offsetLeft) + "px"
       }
-      
-      function showOptions() {
-        if (divOpt.style.display == "none") divOpt.style.display = "inline";
-        else divOpt.style.display = "none";
-      	resize()
-      }
     </script>
   </head>
 
@@ -58,14 +52,12 @@
     <style>
       * { font-family:arial;font-size:10pt;}
       .max { width:100%; padding:2px; }
-      .btn1 { width:100%; height:30px; font-weight:bold; color:gold; background-color:red; }
-      .btn { width:80px; height:26px; margin-top:2px; background-color: black; color:white}
       .hide { display:none }
-      .sel { width:100%; padding:2px; }
+      .btn { width:80px; height:26px; margin-top:2px; background-color: black; color:white}
       .img { width:24px; height:24px; display:inline; }
       table { border-collapse:separate; border-spacing:2px 2px; }
       tr, td, body, a { background-color: rgb(80,80,80); color: white; }
-      #divInfo { margin: 0px 12px 0px 2px; } /* fix textarea width */
+      #divInfo { margin: 0px 10px 0px 2px; } /* fix textarea width */
     </style>
     <table width="100%"><tr>
         <td width="70px"></td>
@@ -73,10 +65,10 @@
         <td width="8%"></td>
       </tr><tr>
         <td><a href=# title="click to reload files" onclick="reload()">Channel</a></td>
-        <td colspan="2"><select id="selChan" class="sel" save="select"></select></td>
+        <td colspan="2"><select id="selChan" class="max" save="select"></select></td>
       </tr><tr>
         <td><a href=# title="click to reload files" onclick="reload()">Mode</a></td>
-        <td colspan="2"><select id="selMode" class="sel" save="select"></select></td>
+        <td colspan="2"><select id="selMode" class="max" save="select"></select></td>
       </tr><tr>
         <td><a href=# title="click to paste from clipboard" onclick="doCmd('Paste')">Start</a></td>
         <td colspan="2"><input type="search" id="txtStart" class="max" save="value" /></td>
@@ -92,17 +84,19 @@
           <button class="btn" onclick="doCreate()">Create</button>
           <button class="btn" onclick="doCmd('PlayList', selChan.value)">PlayList</button>
           <button class="btn" onclick="doCmd('Play', selChan.value)">Play</button>
+          <button class="btn" onclick="doCmd('Tasks')">Tasks</button>
         </td>
         <td><image class="img" src="ant2t.gif" /></td>
       </tr><tr>
         <td></td>
         <td colspan="1">
           <button class="btn" onclick="doCmd('CmdFile')">CmdFile</button>
-          <button class="btn" onclick="doCmd('PlsFile')">PlsFile</button>
-          <button class="btn" onclick="doCmd('Tasks')">Tasks</button>
+          <button class="btn" onclick="doCmd('ChanFile')">ChanFile</button>
+          <button class="btn" onclick="doCmd('SelFile', 1); reload()">SelFile1</button>
+          <button class="btn" onclick="doCmd('SelFile', 2); reload();">SelFile2</button>
         </td>
         <td style="white-space:nowrap;">
-          <image class="img" title="show/hide options" onclick="showOptions()" src="settings.png" />
+          <image class="img" title="show/hide options" onclick="toggleShow('divOpt')" src="settings.png" />
           <!--<image class="img" title="refresh list" onclick="reload()" src="refresh2.png" />-->
           <image class="img" title="show/hide console" onclick="doCmd('Console')" src="console1.png" />
         </td>

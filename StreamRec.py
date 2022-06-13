@@ -9,6 +9,7 @@ import win32gui, win32con
 import eel
 import clipboard
 import scheduler
+import GetLiveStreams
 
 # console visibility
 conWin = win32gui.GetForegroundWindow()
@@ -44,6 +45,8 @@ fn = os.path.splitext(os.path.abspath(sys.argv[0]))[0]
 fncfg = fn + ".json"
 fncmd = fn + ".cmd"
 fnpls = fn + ".pls"
+fnm3u = fn + ".m3u8"
+fnchan = fnpls
 if os.path.exists(fncfg):
     with open(fncfg, 'r') as f1:
         x = json.load(f1)
@@ -61,7 +64,7 @@ def saveParams(x):
 @eel.expose
 def loadParams():
     xparam["selMode_values"] = getModes()
-    xparam["selChan_values"] = getChannels()
+    xparam["selChan_values"] = getChannels(fnchan)
     dump(xparam)
     return xparam
 
@@ -77,12 +80,19 @@ def getModes():
                 modes.append(m)
     return modes
 
+# get channess from file
+def getChannels(fname):
+    if fname.endswith(".pls"):
+        return getChannelsPls(fname)
+    if fname.endswith(".m3u8"):
+        return getChannelsM3u(fname)
+
 # get channess from pls file
-def getChannels():
+def getChannelsPls(fname):
     global channels
     channels = {}
-    if os.path.exists(fnpls):
-        with open(fnpls, 'r') as f1:
+    if os.path.exists(fname):
+        with open(fname, 'r', encoding="utf-8") as f1:
             t = f1.read()
         pls = {}
         for x in t.split("\n"):
@@ -93,6 +103,23 @@ def getChannels():
             v = f'File{i}'
             if k in pls.keys() and v in pls.keys(): 
                 channels[pls[k]] = pls[v]
+    return list(channels.keys())
+
+# get channess from m3u file
+def getChannelsM3u(fname):
+    global channels
+    channels = {}
+    if os.path.exists(fname):
+        with open(fname, 'r', encoding="utf-8") as f1:
+            while True:
+                x1 = f1.readline()
+                if not x1: break
+                if x1.startswith("#EXTINF:"):
+                    a = x1.split(",", 1)
+                    x2 = f1.readline()
+                    if not x2: break
+                    if len(a) == 2: 
+                        channels[a[1].strip()] = x2.strip()
     return list(channels.keys())
 
 def dump(o):
@@ -132,10 +159,10 @@ def doCreate(chan, mode, start, end, title):
         args = f'/s /c ""{fncmd}" {url} "{destfile}" mode_{mode}"'
 
         s = f'\nscheduled task:\n  folder: {folder}\n  taskname: {taskname}\n'
-        s += f'  start: {datetime.strftime(tstart, tFormatUi)}'
-        s += f'  endt: {datetime.strftime(tend, tFormatUi)}'
-        s += f'  exe: {exe}'
-        s += f'  args: {args}\n'
+        s += f'  start: {datetime.strftime(tstart, tFormatUi)}\n'
+        s += f'  end: {datetime.strftime(tend, tFormatUi)}\n'
+        s += f'  exe: {exe}\n'
+        s += f'  args: {args}'
         eel.prl(s)
         
         scheduler.createTask(folder, taskname, tstart, tend, exe, args)
@@ -147,7 +174,7 @@ def paste():
         s = clipboard.paste()
         print(s)
         # 12.04.2019 21:45–23:20 - ARD-alpha - Fawlty Towers
-        s = s.replace("–", "-")
+        s = s.replace("–", "-").strip()
         a = s.split(" - ", 2)
         if len(a) != 3: return
         chan = a[1]
@@ -162,10 +189,19 @@ def paste():
         offset = timedelta(minutes=int(xparam["txtOffset"]))
         tstart = datetime.strftime(tstart - offset, tFormatUi)
         tend = datetime.strftime(tend + offset, tFormatUi)
-        eel.prl(f'\npaste from clipboard:\n{s}\n')
+        eel.prl(f'\npaste from clipboard:\n{s}')
         eel.pasteResult(tstart, tend, chan, title)
     except:
         traceback.print_exc()
+
+def setChanfile(p):
+    global fnchan
+    if p == 1:
+        fnchan = fnpls
+    if p == 2:
+        fnchan = fnm3u
+        GetLiveStreams.run(0, fnchan)
+    return f"\nchanged to file {p}: {fnchan}"
 
 @eel.expose
 def doCmd(s, p):
@@ -173,14 +209,15 @@ def doCmd(s, p):
     cmd = None
     log = ""
     if (s == "CmdFile"): cmd = f'notepad.exe "{fncmd}"'
-    if (s == "PlsFile"): cmd = f'notepad.exe "{fnpls}"'
+    if (s == "ChanFile"): cmd = f'notepad.exe "{fnchan}"'
     if (s == "Play"): cmd = f'"{xparam["txtPlayer"]}" "{channels[p]}"'
     if (s == "Tasks"): cmd = f'taskschd.msc'
     if (s == "PlayList"): log = getPlayist(p)
     if (s == "Console"): showConsole(conToggle)
     if (s == "Paste"): paste()
+    if (s == "SelFile"): log = setChanfile(p)
     if cmd:
-        log = f'doCmd ({s}, {p})\n{cmd}'
+        log = f'\ndoCmd ({s}, {p})\n{cmd}'
         subprocess.Popen(cmd, shell=True)
     if log: eel.prl(log)
     #return(log)

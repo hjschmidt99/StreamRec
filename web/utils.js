@@ -127,3 +127,11 @@ function prl(text) {
   pr(text + "\n");
 }
 
+
+// toggle visibility
+      
+function toggleShow(id) {
+  let x = document.getElementById(id).style;
+  x.display = x.display == "none" ? "inline" : "none";
+  resize()
+}
