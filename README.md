@@ -5,7 +5,7 @@ This is my first attempt to create a Windows desktop app with Eel.
 [Eel](https://github.com/ChrisKnott/Eel) is an excellent, simple to use framework to implement a Python backend with an HTML/JavaScript/whatever UI running in your browser.
 
 Briefly
-- A playlist (m3u8 or pls format) is shown in the channel name drop dowwn to select the live stream URL for the recording.
+- A playlist (m3u8 or pls format) is used for the channel name drop down to select the live stream URL for the recording.
 - In a cmd file different FFmpeg commands are specified under goto-labels ("modes"), e.g. to tell which audio streams shall be recorded. The mode can be selected in the UI from a drop down.
 - Start time, end time and title of the recording are entered in text boxes.
 - Clicking the "Create" button will add an event to the Windows task scheduler with the given parameters.
@@ -33,8 +33,6 @@ e.g.<br>
 `12.04.2019 21:45–23:20 - ARD-alpha - Fawlty Towers`
 
 TVBrowser configuration for the clipboard plugin:
-
-
 
 <textarea rows=1 style="width:100%;overflow:scroll;white-space:nowrap;">{leadingZero(start_day,"2")}.{leadingZero(start_month,"2")}.{start_year} {leadingZero(start_hour,"2")}:{leadingZero(start_minute,"2")}-{leadingZero(end_hour,"2")}:{leadingZero(end_minute,"2")} - {channel_name} - {title}</textarea>
 
