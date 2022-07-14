@@ -33,7 +33,8 @@ File10a=https://brcdn.vo.llnwd.net/br/fs/bfs_sued/hls/de/master_1280p_3628.m3u8
 File10=https://mcdn.br.de/br/fs/bfs_sued/hls/de/master.m3u8
 
 Title11=NDR Hamburg
-File11=http://ndrfs-lh.akamaihd.net/i/ndrfs_nds@430233/master.m3u8
+File11a=http://ndrfs-lh.akamaihd.net/i/ndrfs_nds@430233/master.m3u8
+File11=https://mcdn.ndr.de/ndr/hls/ndr_fs/ndr_nds/master.m3u8
 
 Title12=MDR Sachsen
 File12=https://mdrtvsnhls.akamaized.net/hls/live/2016928/mdrtvsn/master.m3u8

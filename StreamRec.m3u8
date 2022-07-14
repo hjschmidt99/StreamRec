@@ -1,8 +1,6 @@
 #EXTM3U8
 #EXTINF:0,Das Erste (ARD)
 https://s6.hopslan.com:443/ardc/index.m3u8
-#EXTINF:0,ZDF
-https://s6.hopslan.com:443/zdfg1/index.m3u8
 #EXTINF:0,HR
 https://s4.hopslan.com:443/hr/index.m3u8
 #EXTINF:0,RTL
@@ -66,7 +64,7 @@ https://s6.hopslan.com:443/pro7maxxv/index.m3u8
 #EXTINF:0,SAT.1 GOLD
 https://s6.hopslan.com:443/goldc/index.m3u8
 #EXTINF:0,ServusTV Deutschland
-https://s66.hopslan.com/servus/index.m3u8
+https://s6.hopslan.com/servus1/index.m3u8
 #EXTINF:0,ORF 1
 https://s6.hopslan.com/orf11/index.m3u8
 #EXTINF:0,ORF 2
