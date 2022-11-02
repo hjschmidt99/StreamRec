@@ -16,8 +16,7 @@ Buttons:
 - Play: one the live stream in the video player configured in the settings.
 - Tasks: show the Windows task scheduler. Your planned recordings can be found in the Record folder.
 - CmdFile: edit the command file with your different modes (FFmpeg commands)-
-- ChanFile: Edit the currently selected channel file (playlist).
-- SelFile1, SelFile2: an alternative channel playlist can (File2) be selected. This file is also created dynamically form an internet source.
+- ChanFile: Edit the channel file (playlist).
 
 Settings:
 - Download directory where to save the recordings.

@@ -9,7 +9,6 @@ import win32gui, win32con
 import eel
 import clipboard
 import scheduler
-import GetLiveStreams
 
 # console visibility
 conWin = win32gui.GetForegroundWindow()
@@ -194,15 +193,6 @@ def paste():
     except:
         traceback.print_exc()
 
-def setChanfile(p):
-    global fnchan
-    if p == 1:
-        fnchan = fnpls
-    if p == 2:
-        fnchan = fnm3u
-        GetLiveStreams.run(0, fnchan)
-    return f"\nchanged to file {p}: {fnchan}"
-
 @eel.expose
 def doCmd(s, p):
     print(f'doCmd {s}, {p}')
@@ -215,7 +205,6 @@ def doCmd(s, p):
     if (s == "PlayList"): log = getPlayist(p)
     if (s == "Console"): showConsole(conToggle)
     if (s == "Paste"): paste()
-    if (s == "SelFile"): log = setChanfile(p)
     if cmd:
         log = f'\ndoCmd ({s}, {p})\n{cmd}'
         subprocess.Popen(cmd, shell=True)
