@@ -1,8 +1,8 @@
 {
     "x": 0,
-    "y": 465,
-    "w": 699,
-    "h": 486,
+    "y": 429,
+    "w": 696,
+    "h": 502,
     "port": 0,
     "txtDir": "D:\\Download\\Media",
     "txtPlayer": "C:\\Program Files\\DAUM\\PotPlayer\\PotPlayerMini64.exe",
@@ -12,7 +12,9 @@
         "AllStreams",
         "V0_AllAudio",
         "V0_A0_A1_(Neo)",
-        "V3_A0_A5_(One)",
+        "V3_A0_A1_(One)",
+        "V4_AllAudio_(BR)",
+        "Default_Timeshift_all",
         "Test"
     ],
     "selChan_values": [
@@ -60,10 +62,10 @@
         "VISIT-X.tv",
         "ET"
     ],
-    "txtStart": "14.07.2022 21:50",
-    "txtEnd": "15.07.2022 00:30",
-    "txtTitle": "Der letzte Befehl",
+    "txtStart": "02.11.2022 21:40",
+    "txtEnd": "02.11.2022 23:05",
+    "txtTitle": "Miss Fishers mysteri\u00f6se Mordf\u00e4lle",
     "chkClearUrl": false,
-    "selChan": "ServusTV Deutschland",
-    "selMode": "Default"
+    "selChan": "One",
+    "selMode": "V3_A0_A1_(One)"
 }

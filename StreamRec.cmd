@@ -32,14 +32,21 @@ goto end
 %ffmpeg1% -i %1 -c copy -map 0:v:0 -map 0:a:0 -map 0:a:1 %fn% 2>&1 | find /V "Skip ("
 goto end
 
-:mode_V3_A0_A5_(One)
-%ffmpeg1% -i %1 -c copy -map 0:v:3 -map 0:a:0 -map 0:a:5 %fn% 2>&1 | find /V "Skip ("
+:mode_V3_A0_A1_(One)
+%ffmpeg1% -i %1 -c copy -map 0:v:3 -map 0:a:0 -map 0:a:1 %fn% 2>&1 | find /V "Skip ("
 goto end
+
+:mode_V4_AllAudio_(BR)
+%ffmpeg1% -i %1 -c copy -map 0:v:4 -map 0:a %fn% 2>&1 | find /V "Skip ("
+goto end
+
+:mode_Default_Timeshift_all
+%ffmpeg1% -live_start_index 1 -i %1 -c copy %fn% 2>&1 | find /V "Skip ("
+goto exit
 
 :mode_Test
 ::%ffmpeg2% -i %1 -c copy %fn%
 %ffmpeg2% -i %1 -c copy -map 0:v:3 -map 0:a:0 -map 0:a:5 %fn% 2>&1 | find /V "Skip ("
-goto exit
 
 :end
 set /a n=n+1
