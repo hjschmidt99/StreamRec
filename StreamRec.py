@@ -32,7 +32,7 @@ xparam = {
     "w": 800,
     "h": 500,
     "port": 0,
-    "txtDir": r"D:\Download\\Media",
+    "txtDir": r"D:\Download\Media",
     "txtPlayer": r"C:\Program Files\DAUM\PotPlayer\PotPlayerMini64.exe",
     "txtOffset": "15",
 }
