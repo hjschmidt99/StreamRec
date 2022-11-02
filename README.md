@@ -1,5 +1,7 @@
 # StreamRec - Stream Recorder
 
+Record a live TV stream for a given start time, end time and TV channel URL (m3u).
+
 This is my first attempt to create a Windows desktop app with Eel.
 
 [Eel](https://github.com/ChrisKnott/Eel) is an excellent, simple to use framework to implement a Python backend with an HTML/JavaScript/whatever UI running in your browser.
@@ -33,9 +35,7 @@ e.g.<br>
 
 TVBrowser configuration for the clipboard plugin:
 
-
-
-<textarea rows=1 style="width:100%;overflow:scroll;white-space:nowrap;">{leadingZero(start_day,"2")}.{leadingZero(start_month,"2")}.{start_year} {leadingZero(start_hour,"2")}:{leadingZero(start_minute,"2")}-{leadingZero(end_hour,"2")}:{leadingZero(end_minute,"2")} - {channel_name} - {title}</textarea>
+`{leadingZero(start_day,"2")}.{leadingZero(start_month,"2")}.{start_year} {leadingZero(start_hour,"2")}:{leadingZero(start_minute,"2")}-{leadingZero(end_hour,"2")}:{leadingZero(end_minute,"2")} - {channel_name} - {title}`
 
 Clicking on the Start label will 
 - paste from the clipboard
