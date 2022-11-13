@@ -4,6 +4,7 @@ import json
 import subprocess
 import traceback
 import urllib.request
+import urllib.parse
 from datetime import datetime, timedelta
 import win32gui, win32con
 import eel
@@ -35,6 +36,7 @@ xparam = {
     "txtDir": r"D:\Download\Media",
     "txtPlayer": r"C:\Program Files\DAUM\PotPlayer\PotPlayerMini64.exe",
     "txtOffset": "15",
+    "savePlaylist": True,
 }
 
 tFormatUi = "%d.%m.%Y %H:%M"
@@ -79,14 +81,14 @@ def getModes():
                 modes.append(m)
     return modes
 
-# get channess from file
+# get channels from file
 def getChannels(fname):
     if fname.endswith(".pls"):
         return getChannelsPls(fname)
     if fname.endswith(".m3u8"):
         return getChannelsM3u(fname)
 
-# get channess from pls file
+# get channels from pls file
 def getChannelsPls(fname):
     global channels
     channels = {}
@@ -104,7 +106,7 @@ def getChannelsPls(fname):
                 channels[pls[k]] = pls[v]
     return list(channels.keys())
 
-# get channess from m3u file
+# get channels from m3u file
 def getChannelsM3u(fname):
     global channels
     channels = {}
@@ -215,13 +217,50 @@ def getPlayist(chan):
     url = channels[chan]
     with urllib.request.urlopen(url) as response:
         rsp = response.read()
-    s = f'\nChannel: {chan}\n{url}\n{rsp.decode("utf-8")}\n\n'
+    p1 = rsp.decode("utf-8")
+    s = f'\nChannel: {chan}\n{url}\n{p1}\n\n'
     print(s)
+
+    if xparam["savePlaylist"]: 
+        fn1 = url.split("?")[0]
+        fn1 = toFilename(chan) + "-" + os.path.basename(fn1)
+        fn1 = os.path.join(xparam["txtDir"], fn1)
+        with open(fn1, 'w') as f1:
+            f1.write(p1)
+
+        savenext = False
+        for x in p1.splitlines():
+            if savenext:
+                url2 = x
+                if not url2.startswith("http"):
+                    url2 = url.rsplit("/", 1)[0] + "/" + url2
+                with urllib.request.urlopen(url2) as response:
+                    rsp = response.read()
+                p2 = rsp.decode("utf-8").splitlines()
+
+                savenext3 = False
+                for ix3, x3 in enumerate(p2):
+                    if savenext3:
+                        if not x3.startswith("http"):
+                            p2[ix3] = url2.rsplit("/", 1)[0] + "/" + x3
+                    savenext3 = x3.startswith("#EXTINF")
+                
+                fn2 = url2.split("?")[0]
+                fn2 = toFilename(chan) + "-" + os.path.basename(fn2)
+                fn2 = os.path.join(xparam["txtDir"], fn2)
+                with open(fn2, 'w') as f2:
+                    f2.write("\n".join(p2))
+            savenext = x.startswith("#EXT-X-STREAM-INF")
+
     return s
 
 
+#cmdline_args = []    
+cmdline_args = ["–disable-translate", "–incognito"]
+#cmdline_args = ["--window-position=8000,0", "–disable-translate", "–incognito"]
+#cmdline_args = [f"--window-position={xparam['x']},{xparam['y']}", f"--window-size={xparam['w']},{xparam['h']}", "–disable-translate", "–incognito"]
 eel.start('main.html', 
-    cmdline_args=["--window-position=8000,0"], 
+    cmdline_args=cmdline_args, 
     port=xparam["port"], 
     position=(xparam["x"], xparam["y"]), 
     size=(xparam["w"], xparam["h"]),
