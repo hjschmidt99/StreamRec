@@ -215,45 +215,46 @@ def doCmd(s, p):
 
 def getPlayist(chan):
     url = channels[chan]
-    with urllib.request.urlopen(url) as response:
-        rsp = response.read()
-    p1 = rsp.decode("utf-8")
+    p1 = ""
+    if not xparam["savePlaylist"]: 
+        with urllib.request.urlopen(url) as response:
+            rsp = response.read()
+        p1 = rsp.decode("utf-8")
+    else:
+        p1 = processM3u(chan, url, xparam["txtDir"])
     s = f'\nChannel: {chan}\n{url}\n{p1}\n\n'
     print(s)
-
-    if xparam["savePlaylist"]: 
-        fn1 = url.split("?")[0]
-        fn1 = toFilename(chan) + "-" + os.path.basename(fn1)
-        fn1 = os.path.join(xparam["txtDir"], fn1)
-        with open(fn1, 'w') as f1:
-            f1.write(p1)
-
-        savenext = False
-        for x in p1.splitlines():
-            if savenext:
-                url2 = x
-                if not url2.startswith("http"):
-                    url2 = url.rsplit("/", 1)[0] + "/" + url2
-                with urllib.request.urlopen(url2) as response:
-                    rsp = response.read()
-                p2 = rsp.decode("utf-8").splitlines()
-
-                savenext3 = False
-                for ix3, x3 in enumerate(p2):
-                    if savenext3:
-                        if not x3.startswith("http"):
-                            p2[ix3] = url2.rsplit("/", 1)[0] + "/" + x3
-                    savenext3 = x3.startswith("#EXTINF")
-                
-                fn2 = url2.split("?")[0]
-                fn2 = toFilename(chan) + "-" + os.path.basename(fn2)
-                fn2 = os.path.join(xparam["txtDir"], fn2)
-                with open(fn2, 'w') as f2:
-                    f2.write("\n".join(p2))
-            savenext = x.startswith("#EXT-X-STREAM-INF")
-
     return s
 
+def processM3u(chan, url, dir):
+    with urllib.request.urlopen(url) as response:
+        rsp = response.read()
+    p = rsp.decode("utf-8")
+    p1 = p.splitlines()
+
+    savenext1 = False
+    savenext2 = False
+    for ix1, x1 in enumerate(p1):
+        if savenext1 or savenext2:
+            url2 = x1
+            # make relative urls absolute
+            if not url2.startswith("http"):
+                url2 = url.rsplit("/", 1)[0] + "/" + url2
+                p1[ix1] = url2
+
+            if savenext1:
+                processM3u(chan, url2)
+
+        savenext1 = x1.startswith("#EXT-X-STREAM-INF") 
+        savenext2 = x1.startswith("#EXTINF")
+
+    fn1 = url.split("?")[0]
+    fn1 = toFilename(chan) + "-" + os.path.basename(fn1)
+    fn1 = os.path.join(dir, fn1)
+    with open(fn1, 'w') as f1:
+        f1.write("\n". join(p1))
+
+    return p
 
 #cmdline_args = []    
 cmdline_args = ["–disable-translate", "–incognito"]
