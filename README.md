@@ -23,7 +23,7 @@ Buttons:
 Settings:
 - Download directory where to save the recordings.
 - Offset: Number of minutes to extend start and end time when pasting via the Start label (see below).
-- Plaer: the video player application the be used with the Play button.
+- Player: the video player application the be used with the Play button.
 
 ## Paste Operation
 
