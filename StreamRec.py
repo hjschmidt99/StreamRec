@@ -243,7 +243,7 @@ def processM3u(chan, url, dir):
                 p1[ix1] = url2
 
             if savenext1:
-                processM3u(chan, url2)
+                processM3u(chan, url2, dir)
 
         savenext1 = x1.startswith("#EXT-X-STREAM-INF") 
         savenext2 = x1.startswith("#EXTINF")

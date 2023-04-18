@@ -15,6 +15,7 @@ File4=https://zdf-hls-18.akamaized.net/hls/live/2016501/dach/high/master.m3u8
 
 Title5=arte
 File5=https://artesimulcast.akamaized.net/hls/live/2030993/artelive_de/master_v720.m3u8
+File5a=https://artesimulcast.akamaized.net/hls/live/2030993/artelive_de/index.m3u8
 
 Title6=KiKA
 File6=https://kikageohls.akamaized.net/hls/live/2022693/livetvkika_de/master.m3u8

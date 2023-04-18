@@ -29,17 +29,29 @@ goto end
 %ffmpeg1% -i %1 -c copy -map 0:v:0 -map 0:a:0 -map 0:a:1 %fn% 2>&1 | find /V "Skip ("
 goto end
 
-:mode_V3_A0_A1_(One)
-%ffmpeg1% -i %1 -c copy -map 0:v:3 -map 0:a:0 -map 0:a:1 %fn% 2>&1 | find /V "Skip ("
+:mode_V1_A0_A1_(One)
+%ffmpeg1% -i %1 -c copy -map 0:v:1 -map 0:a:0 -map 0:a:1 %fn% 2>&1 | find /V "Skip ("
 goto end
 
 :mode_V4_AllAudio_(BR)
 %ffmpeg1% -i %1 -c copy -map 0:v:4 -map 0:a %fn% 2>&1 | find /V "Skip ("
 goto end
 
+:mode_V2_AllAudio_(RBB)
+%ffmpeg1% -i %1 -c copy -map 0:v:2 -map 0:a %fn% 2>&1 | find /V "Skip ("
+goto end
+
 :mode_Default_Timeshift_all
 %ffmpeg1% -live_start_index 1 -i %1 -c copy %fn% 2>&1 | find /V "Skip ("
 goto exit
+
+:mode_V3_A0_A1_(One)_Timeshift_all
+%ffmpeg1% -live_start_index 1 -i %1 -c copy -map 0:v:3 -map 0:a:0 -map 0:a:1 %fn% 2>&1 | find /V "Skip ("
+goto end
+
+:mode_V0_A0_A1_(Neo)_Timeshift_all
+%ffmpeg1% -live_start_index 1 -i %1 -c copy -map 0:v:0 -map 0:a:0 -map 0:a:1 %fn% 2>&1 | find /V "Skip ("
+goto end
 
 :mode_Test
 set ffmpeg2=%ffmpeg% %args1% -reconnect 1 -reconnect_streamed 1 -reconnect_on_network_error 1 -reconnect_delay_max 2
@@ -52,7 +64,7 @@ goto exit
 :: retry, autorename file, use start index in the past to fill the gap to the aborted file
 set /a n=n+1
 set fn="%~dpn2%n%%~x2"
-set ffmpeg1=%ffmpeg% %args1% -live_start_index -30
+set ffmpeg1=%ffmpeg% %args1% -live_start_index -50
 goto retry
 
 :exit
