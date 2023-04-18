@@ -59,10 +59,12 @@
       tr, td, body, a { background-color: rgb(80,80,80); color: white; }
       #divInfo { margin: 0px 10px 0px 2px; } /* fix textarea width */
     </style>
-    <table width="100%"><tr>
-        <td width="70px"></td>
-        <td width="80%"></td>
-        <td width="8%"></td>
+    <table width="100%">
+      <colgroup>
+        <col style="width: 70px">
+        <col style="width: 80%">
+        <col style="width: 8%">
+      </colgroup>
       </tr><tr>
         <td><a href=# title="click to reload files" onclick="reload()">Channel</a></td>
         <td colspan="2"><select id="selChan" class="max" save="select"></select></td>
