@@ -1,137 +1,126 @@
-[playlist]
-NumberOfEntries=43
-
-Title1=Das Erste (ARD)
+﻿[playlist]
+NumberOfEntries=62
 File1=https://mcdn.daserste.de/daserste/de/master.m3u8
-
-Title2=ZDF
+Title1=Das Erste (ARD)
 File2=http://zdf-hls-15.akamaized.net/hls/live/2016498/de/veryhigh/master.m3u8
-
-Title3=HR
+Title2=ZDF
 File3=https://hrhlsde.akamaized.net/hls/live/2024526/hrhlsde/index.m3u8
-
-Title4=3sat
+Title3=HR
 File4=https://zdf-hls-18.akamaized.net/hls/live/2016501/dach/high/master.m3u8
-
+Title4=3sat
+File5=https://artesimulcast.akamaized.net/hls/live/2030993/artelive_de/index.m3u8
 Title5=arte
-File5=https://artesimulcast.akamaized.net/hls/live/2030993/artelive_de/master_v720.m3u8
-File5a=https://artesimulcast.akamaized.net/hls/live/2030993/artelive_de/index.m3u8
-
-Title6=KiKA
 File6=https://kikageohls.akamaized.net/hls/live/2022693/livetvkika_de/master.m3u8
-
-Title7=PHOENIX
+Title6=KiKA
 File7=https://zdf-hls-19.akamaized.net/hls/live/2016502/de/high/master.m3u8
-
-Title8=WDR
+Title7=PHOENIX
 File8=https://mcdn.wdr.de/wdr/wdrfs/de/master.m3u8
-
-Title9=SWR BW
+Title8=WDR
 File9=https://swrbwd-hls.akamaized.net/hls/live/2018672/swrbwd/master.m3u8
-
-Title10=BR Süd
-File10a=https://brcdn.vo.llnwd.net/br/fs/bfs_sued/hls/de/master_1280p_3628.m3u8
+Title9=SWR BW
 File10=https://mcdn.br.de/br/fs/bfs_sued/hls/de/master.m3u8
-
+Title10=BR Süd
+File11=https://mcdn.ndr.de/ndr/hls/ndr_fs/ndr_hh/master.m3u8
 Title11=NDR Hamburg
-File11a=http://ndrfs-lh.akamaihd.net/i/ndrfs_nds@430233/master.m3u8
-File11=https://mcdn.ndr.de/ndr/hls/ndr_fs/ndr_nds/master.m3u8
-
-Title12=MDR Sachsen
 File12=https://mdrtvsnhls.akamaized.net/hls/live/2016928/mdrtvsn/master.m3u8
-
-Title13=RBB Berlin
+Title12=MDR Sachsen
 File13=https://rbb-hls-berlin.akamaized.net/hls/live/2017824/rbb_berlin/master.m3u8
-
+Title13=RBB Berlin
+File14=https://srfs.akamaized.net/hls/live/689649/srfsgeo/index.m3u8
 Title14=SR
-File14=http://live2_sr-lh.akamaihd.net/i/sr_universal02@107595/master.m3u8
-
-Title15=ARD-alpha
 File15=https://mcdn.br.de/br/fs/ard_alpha/hls/de/master.m3u8
-
-Title16=One
-File16a=https://mcdn-one.akamaized.net/ardone/hls/master-720p-3328.m3u8
+Title15=ARD-alpha
 File16=https://mcdn.one.ard.de/ardone/hls/master.m3u8
-
+Title16=One
+File17=https://tagesschau.akamaized.net/hls/live/2020115/tagesschau/tagesschau_1/master.m3u8
 Title17=tagesschau24
-File17=http://tagesschau-lh.akamaihd.net/i/tagesschau_1@119231/master.m3u8
-
-Title18=ZDFinfo
 File18=https://zdf-hls-17.akamaized.net/hls/live/2016500/de/high/master.m3u8
-
-Title19=ZDFneo
+Title18=ZDFinfo
 File19=http://zdf-hls-16.akamaized.net/hls/live/2016499/de/veryhigh/master.m3u8
-File19a=https://zdf-hls-16.akamaized.net/hls/live/2016499/de/veryhigh/master.m3u8
-
+Title19=ZDFneo
+File20=https://dwamdstream106.akamaized.net/hls/live/2017965/dwstream106/index.m3u8
 Title20=DW
-File20=http://dwstream72-lh.akamaihd.net/i/dwstream72_live@123556/master.m3u8
-
-Title21=ServusTV Deutschland
 File21=https://stv-live.akamaized.net/hls/live/2031012/lingeoSTVDEwebPri/master.m3u8
-
-Title22=ANIXE HD
+Title21=ServusTV Deutschland
 File22=https://ma.anixa.tv/clips/stream/anixehd/index.m3u8
-
-Title23=ANIXE SD
+Title22=ANIXE HD
 File23=https://ma.anixa.tv/clips/stream/anixesd/index.m3u8
-
+Title23=ANIXE SD
+File24=https://sdn-global-live-streaming-packager-cache.3qsdn.com/13456/13456_264_live.m3u8
 Title24=Deluxe Music
-File24=https://1000338copo-app2749759488.r53.cdn.tv1.eu/1000518lf/1000338copo/live/app2749759488/w2928771075/live247.smil/playlist.m3u8
-
-Title25=MTV
-File25=https://unilivemtveu-lh.akamaihd.net/i/mtvde_1@134922/master.m3u8
-
-Title26=Nick
-File26=https://unilivemtveu-lh.akamaihd.net/i/nickde_1@448749/master.m3u8
-
-Title27=Welt
-File27=https://live2weltcms-lh.akamaihd.net/i/Live2WeltCMS_1@444563/master.m3u8?dw=0
-
-Title28=N24 Doku
-File28=https://weltsfclips-vh.akamaihd.net/i/2021/06/29/20210629-095417_TR000P5U/20210629-095417_TR000P5U_,2000,1500,1000,200,.mp4.csmil/master.m3u8
-
-Title29=DW Deutsch
-File29=https://dwamdstream111.akamaized.net/hls/live/2017972/dwstream111/stream05/streamPlaylist.m3u8
-
-File30=https://dwamdstream107.akamaized.net/hls/live/2017968/dwstream107/stream05/streamPlaylist.m3u8
-Title30=DW Englisch
-
-
-Title31=eoTV HD
-File31=https://5856e1a25f71a.streamlock.net/easycast9-live/_definst_/mp4:livestreamhd5/playlist.m3u8
-
-Title32=health.tv
-File32=http://62.67.13.53:1935/HealthTV/ghtv_live_master.stream/playlist.m3u8
-
-Title33=Muxx.TV
-File33=https://5856e1a25f71a.streamlock.net/easycast7-live/_definst_/livestream/playlist.m3u8
-
-Title34=MyTVplus
-File34=https://mytvplus.iptv-playoutcenter.de/mytvplus/mytvplus.stream_1/playlist.m3u8
-
-Title35=Bild.TV
-File35=https://bildlivehls-lh.akamaihd.net/i/bildtv247_1@427319/master.m3u8
-
-Title36=OE24.TV
-File36=https://varoe24live.sf.apa.at/oe24-live1/oe24.smil/playlist.m3u8
-
-Title37=CBN News
-File37=https://bcliveunivsecure-lh.akamaihd.net/i/news_1@500579/master.m3u8
-
-Title38=Bloomberg TV
-File38=https://liveprodeuwest.akamaized.net/eu1/Channel-EUTVqvs-AWS-ireland-1/Source-EUTVqvs-1000-1_live.m3u8
-
-Title39=meteonews.tv (Schweiz)
-File39=https://streaming.meteonews.net/hls/stream.m3u8
-
-Title40=Kronehit TV
-File40=http://bitcdn-kronehit.bitmovin.com/v2/hls/playlist.m3u8
-
-Title41=BR Panorama
-File41=https://brevent.akamaized.net/hls/live/2028222/event_05/master.m3u8
-
-Title42=VISIT-X.tv
-File42=http://stream.visit-x.tv/vxtv/ngrp:live_all/playlist.m3u8
-
-Title43=ET
-File43=https://etlive-mediapackage-fastly.cbsaavideo.com/dvr/manifest.m3u8
+File25=https://sdn-global-live-streaming-packager-cache.3qsdn.com/65181/65181_264_live.m3u8
+Title25=Deluxe Rock
+File26=https://sdn-global-live-streaming-packager-cache.3qsdn.com/65185/65185_264_live.m3u8
+Title26=Deluxe Flashback
+File27=https://sdn-global-live-streaming-packager-cache.3qsdn.com/64733/64733_264_live.m3u8
+Title27=Deluxe Dance
+File28=https://sdn-global-live-streaming-packager-cache.3qsdn.com/65183/65183_264_live.m3u8
+Title28=Deluxe Rap
+File29=https://unilivemtveu-lh.akamaihd.net/i/mtvde_1@134922/master.m3u8
+Title29=MTV
+File30=https://0d26a00dfbb1.airspace-cdn.cbsivideo.com/nick1999/master/nick1999.m3u8
+Title30=Nick
+File31=https://broadcast.welt.personalstream.tv/v1/manifest/e237d596efe8bf8a700f8f91f1de8bbe03e0fe29/welttv-broadcast-prod/29a36580-294c-4a70-b389-b7dca40f9c52/6.m3u8
+Title31=Welt
+File32=https://weltsfclips-vh.akamaihd.net/i/2023/02/01/20230201-194237_TR000UZC/20230201-194237_TR000UZC_,2000,1500,1000,200,.mp4.csmil/master.m3u8
+Title32=N24 Doku
+File33=https://dwamdstream111.akamaized.net/hls/live/2017972/dwstream111/stream05/streamPlaylist.m3u8
+Title33=DW Deutsch
+File34=https://dwamdstream107.akamaized.net/hls/live/2017968/dwstream107/stream05/streamPlaylist.m3u8
+Title34=DW Englisch
+File35=https://5856e1a25f71a.streamlock.net/easycast9-live/_definst_/mp4:livestreamhd5/playlist.m3u8
+Title35=eoTV HD
+File36=http://62.67.13.53:1935/HealthTV/ghtv_live_master.stream/playlist.m3u8
+Title36=health.tv
+File37=https://5856e1a25f71a.streamlock.net/easycast7-live/_definst_/livestream/playlist.m3u8
+Title37=Muxx.TV
+File38=https://mytvplus.iptv-playoutcenter.de/mytvplus/mytvplus.stream_1/playlist.m3u8
+Title38=MyTVplus
+File39=https://bildlivehls-lh.akamaihd.net/i/bildtv247_1@427319/master.m3u8
+Title39=Bild.TV
+File40=https://varoe24live.sf.apa.at/oe24-live1/oe24.smil/playlist.m3u8
+Title40=OE24.TV
+File41=https://bcliveunivsecure-lh.akamaihd.net/i/news_1@500579/master.m3u8
+Title41=CBN News
+File42=https://liveprodeuwest.akamaized.net/eu1/Channel-EUTVqvs-AWS-ireland-1/Source-EUTVqvs-1000-1_live.m3u8
+Title42=Bloomberg TV
+File43=https://streaming.meteonews.net/hls/stream.m3u8
+Title43=meteonews.tv (Schweiz)
+File44=http://bitcdn-kronehit.bitmovin.com/v2/hls/playlist.m3u8
+Title44=Kronehit TV
+File45=https://brevent.akamaized.net/hls/live/2028222/event_05/master.m3u8
+Title45=BR Panorama
+File46=http://stream.visit-x.tv/vxtv/ngrp:live_all/playlist.m3u8
+Title46=VISIT-X.tv
+File47=https://s6.hopslan.com/disneyc/tracks-v1a1/mono.m3u8
+Title47=Disney Channel
+File48=https://content.pzaz.tv/content-live/de-rtl/tracks-v2a1/mono.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9NC8xOC8yMDIzIDg6NTE6MzQgUE0maGFzaF92YWx1ZT1aOCtha3dBdXFkK09sZ0hiVEJnYUN3PT0mdmFsaWRtaW51dGVzPTE0NDAmaWQ9YWU5NzlkYjQtNTYwNy00YmZjLThjYTAtNmNhMjVhMTVlYWFj
+Title48=RTL
+File49=https://content.pzaz.tv/content-live/de-rtl2/tracks-v2a1/mono.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9NC8xOC8yMDIzIDk6NDg6MjIgUE0maGFzaF92YWx1ZT1KQStMVEZsUndCUkMrUkFWMmI5b2h3PT0mdmFsaWRtaW51dGVzPTE0NDAmaWQ9NjU0YThmYmQtZDkwMC00MWYyLWJiOGYtMGNjZWUxYmQ2MjY4
+Title49=RTL2
+File50=https://content.pzaz.tv/content-live/de-super-rtl/tracks-v2a1/mono.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9NC8xOC8yMDIzIDk6NTQ6MjUgUE0maGFzaF92YWx1ZT1CZTlYTW5kQTlEazVncGVreTh3VWhRPT0mdmFsaWRtaW51dGVzPTE0NDAmaWQ9NDNmMzc5NGUtMzVjYS00YmMxLThjZDktZTdhYzMwYmViYjg2
+Title50=Super RTL
+File51=https://content.pzaz.tv/content-live/de-vox/tracks-v2a1/mono.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9NC8xOC8yMDIzIDk6NTI6NDYgUE0maGFzaF92YWx1ZT1SLzVYaGpOYmdvTTBWZkVJbkRFdlJnPT0mdmFsaWRtaW51dGVzPTE0NDAmaWQ9ZWQ4ZWNhMjMtY2I1Ni00OTU2LTg2NmMtMTE3YTY2MmYzM2Zm
+Title51=VOX 
+File52=https://content.pzaz.tv/content-live/de-rtl-nitro/tracks-v2a1/mono.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9NC8xOC8yMDIzIDk6NTM6NDYgUE0maGFzaF92YWx1ZT1RREJXVVJnMXExUWpQQUFZMEd0dm1RPT0mdmFsaWRtaW51dGVzPTE0NDAmaWQ9ZGI2ZTc0ZmMtMWU1OC00ZmM0LWI1ZDMtY2ZlNTNkMTljZmZk
+Title52=Nitro
+File53=https://content.pzaz.tv/content-live/de-sat-1/tracks-v2a1/mono.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9NC8xOC8yMDIzIDk6NTc6MTAgUE0maGFzaF92YWx1ZT1ENjdYbUFqU05Na1hVQ0ZKR0NCZmR3PT0mdmFsaWRtaW51dGVzPTE0NDAmaWQ9OWRmYzI3MzktNWE5NC00YTViLTlhY2ItMjVmMmZjMGJmMjU2
+Title53=Sat.1
+File54=https://content.pzaz.tv/content-live/de-pro-7/tracks-v2a1/mono.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9NC8xOC8yMDIzIDk6NTU6MTEgUE0maGFzaF92YWx1ZT1jYllONE14K0JKc0Fpek9WdE9KZ2FRPT0mdmFsaWRtaW51dGVzPTE0NDAmaWQ9NDAzMjNlNTUtN2IzMC00N2ViLThlMmUtYTRhY2YxMGIyNzVj
+Title54=ProSieben
+File55=https://content.pzaz.tv/content-live/de-kabel-1/tracks-v2a1/mono.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9NC8xOC8yMDIzIDk6NTY6OCBQTSZoYXNoX3ZhbHVlPWpnMGV6MGswOWZtcWZZWDhYcXVtc0E9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD00ZjViYTk4ZC1mNzM2LTRiMTAtYmRmOC1hMmI1ODg3MDQ0OTY=
+Title55=kabel eins 
+File56=https://content.pzaz.tv/content-live/de-sixx/tracks-v2a1/mono.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9NC8xOC8yMDIzIDk6NTg6NDMgUE0maGFzaF92YWx1ZT1VUDJUUzF1am1HeTRNZXhmSjNUaE1BPT0mdmFsaWRtaW51dGVzPTE0NDAmaWQ9MzQ4MmYwZjAtYWM3Ni00MjI4LWI2YWUtYWJlOTE1NjMwOTYz
+Title56=sixx 
+File57=https://content.pzaz.tv/content-live/de-pro-sieben-maxx/tracks-v2a1/mono.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9NC8xOC8yMDIzIDEwOjE6MjEgUE0maGFzaF92YWx1ZT1vSXh1WWs2OTJIZWVZcGtGZEt0MkhRPT0mdmFsaWRtaW51dGVzPTE0NDAmaWQ9MjYyZDU5N2UtNjA2YS00NGM4LWEyYWUtNTMxYWJlMzM2MDMy
+Title57=ProSieben Maxx
+File58=https://s6.hopslan.com/tele5c/tracks-v1a1/mono.m3u8
+Title58=Tele 5
+File59=https://s6.hopslan.com/vivac/tracks-v1a1/mono.m3u8
+Title59=Comedy Central
+File60=https://s6.hopslan.com/nick/index.m3u8
+Title60=Nick
+File61=https://s6.hopslan.com/orf1/index.m3u8
+Title61=ORF eins
+File62=https://s6.hopslan.com/orf2/index.m3u8
+Title62=ORF 2

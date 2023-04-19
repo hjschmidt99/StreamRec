@@ -36,7 +36,9 @@ xparam = {
     "txtDir": r"D:\Download\Media",
     "txtPlayer": r"C:\Program Files\DAUM\PotPlayer\PotPlayerMini64.exe",
     "txtOffset": "15",
-    "savePlaylist": True,
+    "txtCmdFile": "",
+    "txtChannelFile": "",
+    "chkSavePlaylist": False,
 }
 
 tFormatUi = "%d.%m.%Y %H:%M"
@@ -45,14 +47,17 @@ tFormatUi = "%d.%m.%Y %H:%M"
 fn = os.path.splitext(os.path.abspath(sys.argv[0]))[0]
 fncfg = fn + ".json"
 fncmd = fn + ".cmd"
-fnpls = fn + ".pls"
-fnm3u = fn + ".m3u8"
-fnchan = fnpls
+fnchan = fn + ".m3u8"
 if os.path.exists(fncfg):
     with open(fncfg, 'r') as f1:
         x = json.load(f1)
     for k in x.keys():
         xparam[k] = x[k]
+
+if xparam["txtCmdFile"] == "":
+    xparam["txtCmdFile"] = fncmd
+if xparam["txtChannelFile"] == "":
+    xparam["txtChannelFile"] = fnchan
 
 @eel.expose
 def saveParams(x):
@@ -65,13 +70,15 @@ def saveParams(x):
 @eel.expose
 def loadParams():
     xparam["selMode_values"] = getModes()
-    xparam["selChan_values"] = getChannels(fnchan)
+    xparam["selChan_values"] = getChannels()
     dump(xparam)
     return xparam
 
 # get modes from cmd file
 def getModes():
+    global fncmd
     modes = []
+    fncmd = xparam["txtCmdFile"]
     if os.path.exists(fncmd):
         with open(fncmd, 'r') as f1:
             t = f1.read()
@@ -82,11 +89,13 @@ def getModes():
     return modes
 
 # get channels from file
-def getChannels(fname):
-    if fname.endswith(".pls"):
-        return getChannelsPls(fname)
-    if fname.endswith(".m3u8"):
-        return getChannelsM3u(fname)
+def getChannels():
+    global fnchan
+    fnchan = xparam["txtChannelFile"]
+    if fnchan.endswith(".pls"):
+        return getChannelsPls(fnchan)
+    if fnchan.endswith(".m3u8"):
+        return getChannelsM3u(fnchan)
 
 # get channels from pls file
 def getChannelsPls(fname):
@@ -157,7 +166,7 @@ def doCreate(chan, mode, start, end, title):
         destfile = f'{xparam["txtDir"]}\\{taskname}.ts'
         folder = "\\Record"
         exe = "cmd.exe"
-        args = f'/s /c ""{fncmd}" {url} "{destfile}" mode_{mode}"'
+        args = f'/s /c ""{fncmd}" "{url}" "{destfile}" mode_{mode}"'
 
         s = f'\nscheduled task:\n  folder: {folder}\n  taskname: {taskname}\n'
         s += f'  start: {datetime.strftime(tstart, tFormatUi)}\n'
@@ -170,6 +179,7 @@ def doCreate(chan, mode, start, end, title):
     except:
         traceback.print_exc()
 
+# paste event from clipboard, e.g. copied from TV-Browser
 def paste():
     try:
         s = clipboard.paste()
@@ -216,7 +226,7 @@ def doCmd(s, p):
 def getPlayist(chan):
     url = channels[chan]
     p1 = ""
-    if not xparam["savePlaylist"]: 
+    if not xparam["chkSavePlaylist"]: 
         with urllib.request.urlopen(url) as response:
             rsp = response.read()
         p1 = rsp.decode("utf-8")

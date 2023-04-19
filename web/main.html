@@ -45,76 +45,98 @@
       function resize() {
         txta.style.height = (window.innerHeight - txta.offsetTop - 2 * txta.offsetLeft) + "px"
       }
+    
+      function opt() {
+        reload();
+        toggleShow('divMain');
+        toggleShow('divOpt');
+      }
     </script>
   </head>
 
   <body id="body" style="overflow:hidden;" onresize="resize()">
     <style>
-      * { font-family:arial;font-size:10pt;}
+      * { font-family: arial; font-size: 10pt; vertical-align: middle; }
       .max { width:100%; padding:2px; }
       .hide { display:none }
       .btn { width:80px; height:26px; margin-top:2px; background-color: black; color:white}
-      .img { width:24px; height:24px; display:inline; }
-      table { border-collapse:separate; border-spacing:2px 2px; }
+      .img { width:24px; height:24px; display: inline; }
+      .header { font-size: 12pt; font-weight: bold; }
+      table { border-collapse: separate; border-spacing: 2px 2px; }
       tr, td, body, a { background-color: rgb(80,80,80); color: white; }
       #divInfo { margin: 0px 10px 0px 2px; } /* fix textarea width */
     </style>
-    <table width="100%">
-      <colgroup>
-        <col style="width: 70px">
-        <col style="width: 80%">
-        <col style="width: 8%">
-      </colgroup>
-      </tr><tr>
-        <td><a href=# title="click to reload files" onclick="reload()">Channel</a></td>
-        <td colspan="2"><select id="selChan" class="max" save="select"></select></td>
-      </tr><tr>
-        <td><a href=# title="click to reload files" onclick="reload()">Mode</a></td>
-        <td colspan="2"><select id="selMode" class="max" save="select"></select></td>
-      </tr><tr>
-        <td><a href=# title="click to paste from clipboard" onclick="doCmd('Paste')">Start</a></td>
-        <td colspan="2"><input type="search" id="txtStart" class="max" save="value" /></td>
-      </tr><tr>
-        <td>End</td>
-        <td colspan="2"><input type="search" id="txtEnd" class="max" save="value" /></td>
-      </tr><tr>
-        <td>Title</td>
-        <td colspan="2"><input type="search" id="txtTitle" class="max" save="value" /></td>
-      </tr><tr>
-        <td></td>
-        <td colspan="1">
-          <button class="btn" onclick="doCreate()">Create</button>
-          <button class="btn" onclick="doCmd('PlayList', selChan.value)">PlayList</button>
-          <button class="btn" onclick="doCmd('Play', selChan.value)">Play</button>
-        </td>
-        <td><image class="img" src="ant2t.gif" /></td>
-      </tr><tr>
-        <td></td>
-        <td colspan="1">
-          <button class="btn" onclick="doCmd('CmdFile')">CmdFile</button>
-          <button class="btn" onclick="doCmd('ChanFile')">ChanFile</button>
-          <button class="btn" onclick="doCmd('Tasks')">Tasks</button>
-        </td>
-        <td style="white-space:nowrap;">
-          <image class="img" title="show/hide options" onclick="toggleShow('divOpt')" src="settings.png" />
-          <!--<image class="img" title="refresh list" onclick="reload()" src="refresh2.png" />-->
-          <image class="img" title="show/hide console" onclick="doCmd('Console')" src="console1.png" />
-        </td>
-      </tr></table>
-      <div id=divOpt class=max style="display:none;" >Settings:
-        <table width="100%"><tr>
-            <td width="70px"></td>
-            <td width="80%"></td>
-            <td width="8%"></td>
+      <div id=divMain class=max style="display:inline;" ><span class=header>Event:</span>
+        <table width="100%">
+          <colgroup>
+            <col style="width: 90px">
+            <col style="width: 80%">
+            <col style="width: 8%">
+          </colgroup>
+          <tr>
+            <td><a href=# title="click to reload files" onclick="reload()">Channel</a></td>
+            <td colspan="2"><select id="selChan" class="max" save="select"></select></td>
           </tr><tr>
+            <td><a href=# title="click to reload files" onclick="reload()">Mode</a></td>
+            <td colspan="2"><select id="selMode" class="max" save="select"></select></td>
+          </tr><tr>
+            <td><a href=# title="click to paste from clipboard" onclick="doCmd('Paste')">Start</a></td>
+            <td colspan="2"><input type="search" id="txtStart" class="max" save="value" /></td>
+          </tr><tr>
+            <td>End</td>
+            <td colspan="2"><input type="search" id="txtEnd" class="max" save="value" /></td>
+          </tr><tr>
+            <td>Title</td>
+            <td colspan="2"><input type="search" id="txtTitle" class="max" save="value" /></td>
+          </tr><tr>
+            <td></td>
+            <td colspan="1">
+            <button class="btn" onclick="doCreate()">Create</button>
+            <button class="btn" onclick="doCmd('PlayList', selChan.value)">PlayList</button>
+            <button class="btn" onclick="doCmd('Play', selChan.value)">Play</button>
+            </td>
+            <td><image class="img" src="ant2t.gif" /></td>
+          </tr><tr>
+            <td></td>
+            <td colspan="1">
+            <button class="btn" onclick="doCmd('CmdFile')">CmdFile</button>
+            <button class="btn" onclick="doCmd('ChanFile')">ChanFile</button>
+            <button class="btn" onclick="doCmd('Tasks')">Tasks</button>
+            </td>
+            <td style="white-space:nowrap;">
+            <image class="img" title="show/hide options" onclick="opt()" src="settings.png" />
+            <!--<image class="img" title="refresh list" onclick="reload()" src="refresh2.png" />-->
+            <image class="img" title="show/hide console" onclick="doCmd('Console')" src="console1.png" />
+            </td>
+          </tr></table>
+      </div>
+      <div id=divOpt class=max style="display:none;" ><span class=header>Settings:</span>
+        <table width="100%">
+          <colgroup>
+            <col style="width: 90px">
+            <col style="width: 88%">
+          </colgroup>
+          <tr>
             <td>Dir</td>
-            <td colspan="2"><input type="search" id="txtDir" class="max" save="value" /></td>
+            <td><input type="search" id="txtDir" class="max" save="value" /></td>
           </tr><tr>
             <td>Offset</td>
-            <td colspan="2"><input type="search" id="txtOffset" class="max" save="value" /></td>
+            <td><input type="search" id="txtOffset" class="max" save="value" /></td>
           </tr><tr>
             <td>Player</td>
-            <td colspan="2"><input type="search" id="txtPlayer" class="max" save="value" /></td>
+            <td><input type="search" id="txtPlayer" class="max" save="value" /></td>
+          </tr><tr>
+            <td>CmdFile</td>
+            <td><input type="search" id="txtCmdFile" class="max" save="value" /></td>
+          </tr><tr>
+            <td>ChannelFile</td>
+            <td><input type="search" id="txtChannelFile" class="max" save="value" /></td>
+          </tr><tr>
+            <td></td>
+            <td><input type="checkbox" id="chkSavePlaylist" save="checked" />save playlists to disk</td>
+          </tr><tr>
+            <td></td>
+            <td><button class="btn" onclick="opt()">Back</button></td>
           </tr></table>
       </div>
       <div id="divInfo">Info:<br/><textarea id="txta" class="max" style="resize:none;"></textarea></div>

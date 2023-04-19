@@ -62,7 +62,7 @@ function setParams(x) {
 }
 
 
-// a textbox can have a selectbox mru list with the id poastfix _mru
+// a textbox can have a selectbox mru list with the id postfix _mru
 
 var mrumax = 10
 
