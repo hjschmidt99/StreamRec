@@ -59,6 +59,10 @@ if xparam["txtCmdFile"] == "":
 if xparam["txtChannelFile"] == "":
     xparam["txtChannelFile"] = fnchan
 
+cUrl = "url"
+cArgs1 = "args1"
+cArgs2 = "args2"
+
 @eel.expose
 def saveParams(x):
     for k in x.keys():
@@ -112,24 +116,37 @@ def getChannelsPls(fname):
             k = f'Title{i}'
             v = f'File{i}'
             if k in pls.keys() and v in pls.keys(): 
-                channels[pls[k]] = pls[v]
+                channels[pls[k]] = { cUrl: pls[v] }
     return list(channels.keys())
 
 # get channels from m3u file
 def getChannelsM3u(fname):
     global channels
     channels = {}
+    name = ""
+    data = {}
     if os.path.exists(fname):
         with open(fname, 'r', encoding="utf-8") as f1:
             while True:
                 x1 = f1.readline()
                 if not x1: break
+                x1 = x1.strip()
                 if x1.startswith("#EXTINF:"):
                     a = x1.split(",", 1)
-                    x2 = f1.readline()
-                    if not x2: break
                     if len(a) == 2: 
-                        channels[a[1].strip()] = x2.strip()
+                        if name != "":
+                            channels[name] = data
+                        name = a[1].strip()
+                        data = {}
+                elif x1.startswith("#EXTARGS1:"):
+                    data[cArgs1] = x1.partition(":")[2]
+                elif x1.startswith("#EXTARGS2:"):
+                    data[cArgs2] = x1.partition(":")[2]
+                elif x1.startswith("http"):
+                    data[cUrl] = x1
+            if name != "":
+                channels[name] = data
+
     return list(channels.keys())
 
 def dump(o):
@@ -153,9 +170,13 @@ def toFilename(s):
 
 # create task
 @eel.expose
-def doCreate(chan, mode, start, end, title):
+def doCreate(chan, mode, start, end, title, useMaps, fullTimeshift):
     try:
-        url = channels[chan]
+        c = channels[chan]
+        url = c[cUrl]
+        args1 = c[cArgs1] if cArgs1 in c.keys() else "" 
+        if fullTimeshift: args1 += " -live_start_index 1"
+        args2 = "" if not useMaps else c[cArgs2] if cArgs2 in c.keys() else "" 
         tstart = datetime.strptime(start, tFormatUi)
         tend = datetime.strptime(end, tFormatUi)
         now = datetime.now()
@@ -166,7 +187,7 @@ def doCreate(chan, mode, start, end, title):
         destfile = f'{xparam["txtDir"]}\\{taskname}.ts'
         folder = "\\Record"
         exe = "cmd.exe"
-        args = f'/s /c ""{fncmd}" "{url}" "{destfile}" mode_{mode}"'
+        args = f'/s /c ""{fncmd}" "{url}" "{destfile}" mode_{mode} "{args1}" "{args2}""'
 
         s = f'\nscheduled task:\n  folder: {folder}\n  taskname: {taskname}\n'
         s += f'  start: {datetime.strftime(tstart, tFormatUi)}\n'
@@ -212,7 +233,7 @@ def doCmd(s, p):
     log = ""
     if (s == "CmdFile"): cmd = f'notepad.exe "{fncmd}"'
     if (s == "ChanFile"): cmd = f'notepad.exe "{fnchan}"'
-    if (s == "Play"): cmd = f'"{xparam["txtPlayer"]}" "{channels[p]}"'
+    if (s == "Play"): cmd = f'"{xparam["txtPlayer"]}" "{channels[p][cUrl]}"'
     if (s == "Tasks"): cmd = f'taskschd.msc'
     if (s == "PlayList"): log = getPlayist(p)
     if (s == "Console"): showConsole(conToggle)
@@ -224,7 +245,7 @@ def doCmd(s, p):
     #return(log)
 
 def getPlayist(chan):
-    url = channels[chan]
+    url = channels[chan][cUrl]
     p1 = ""
     if not xparam["chkSavePlaylist"]: 
         with urllib.request.urlopen(url) as response:

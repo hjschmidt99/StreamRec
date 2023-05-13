@@ -1,11 +1,15 @@
 ﻿#EXTM3U8
 #EXTINF:-1,Das Erste (ARD)
+#EXTARGS2: -map 0:v:1 -map 0:a
 https://mcdn.daserste.de/daserste/de/master.m3u8
 #EXTINF:-1,ZDF
-http://zdf-hls-15.akamaized.net/hls/live/2016498/de/veryhigh/master.m3u8
+#EXTARGS2: -map 0:v:0 -map 0:a:0 -map 0:a:1 
+https://zdf-hls-15.akamaized.net/hls/live/2016498/de/veryhigh/master.m3u8
 #EXTINF:-1,HR
+#EXTARGS2: -map 0:v:2 -map 0:a
 https://hrhlsde.akamaized.net/hls/live/2024526/hrhlsde/index.m3u8
 #EXTINF:-1,3sat
+#EXTARGS2: -map 0:v:6 -map 0:a:0 -map 0:a:1 
 https://zdf-hls-18.akamaized.net/hls/live/2016501/dach/high/master.m3u8
 #EXTINF:-1,arte
 https://artesimulcast.akamaized.net/hls/live/2030993/artelive_de/index.m3u8
@@ -30,13 +34,15 @@ https://srfs.akamaized.net/hls/live/689649/srfsgeo/index.m3u8
 #EXTINF:-1,ARD-alpha
 https://mcdn.br.de/br/fs/ard_alpha/hls/de/master.m3u8
 #EXTINF:-1,One
+#EXTARGS2: -map 0:v:1 -map 0:a:0 -map 0:a:1 
 https://mcdn.one.ard.de/ardone/hls/master.m3u8
 #EXTINF:-1,tagesschau24
 https://tagesschau.akamaized.net/hls/live/2020115/tagesschau/tagesschau_1/master.m3u8
 #EXTINF:-1,ZDFinfo
 https://zdf-hls-17.akamaized.net/hls/live/2016500/de/high/master.m3u8
 #EXTINF:-1,ZDFneo
-http://zdf-hls-16.akamaized.net/hls/live/2016499/de/veryhigh/master.m3u8
+#EXTARGS2: -map 0:v:0 -map 0:a:0 -map 0:a:1 
+https://zdf-hls-16.akamaized.net/hls/live/2016499/de/veryhigh/master.m3u8
 #EXTINF:-1,DW
 https://dwamdstream106.akamaized.net/hls/live/2017965/dwstream106/index.m3u8
 #EXTINF:-1,ServusTV Deutschland
@@ -90,7 +96,9 @@ http://bitcdn-kronehit.bitmovin.com/v2/hls/playlist.m3u8
 #EXTINF:-1,BR Panorama
 https://brevent.akamaized.net/hls/live/2028222/event_05/master.m3u8
 #EXTINF:-1,Disney Channel
-https://s6.hopslan.com/disneyc/tracks-v1a1/mono.m3u8?token=%2A
+#EXTARGS1: -headers Referer:https://www.livestreamde.com/
+###https://s6.hopslan.com/disneyc/tracks-v1a1/mono.m3u8?token=%2A
+https://stream.hdtvizlecanli.com/disneyger2.m3u8
 #EXTINF:-1,RTL
 https://content.pzaz.tv/content-live/de-rtl/tracks-v2a1/mono.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9NC8xOC8yMDIzIDg6NTE6MzQgUE0maGFzaF92YWx1ZT1aOCtha3dBdXFkK09sZ0hiVEJnYUN3PT0mdmFsaWRtaW51dGVzPTE0NDAmaWQ9YWU5NzlkYjQtNTYwNy00YmZjLThjYTAtNmNhMjVhMTVlYWFj
 #EXTINF:-1,RTL2

@@ -3,6 +3,8 @@
 :: %1 : url
 :: %2 : dest file
 :: %3 : mode
+:: %4 : arguments in front of -i, e.g. headers
+:: %5 : arguments after -1, e.g. stream maps
 :::::::::::::::::::::::::::::::
 set ffmpeg="D:\Programme\ffmpeg\bin\ffmpeg.exe"
 set args1=-http_persistent 0 -analyzeduration 15000000 -ignore_unknown
@@ -14,43 +16,15 @@ set fn=%2
 goto %3
 
 :mode_Default
-%ffmpeg1% -i %1 -c copy %fn% 2>&1 | find /V "Skip ("
+%ffmpeg1% %~4 -i %1 -c copy %~5 %fn% 2>&1 | find /V "Skip ("
 goto end
 
 :mode_AllStreams
-%ffmpeg1% -i %1 -c copy -map 0 %fn%
+%ffmpeg1% %~4 -i %1 -c copy -map 0 %fn% 2>&1 | find /V "Skip ("
 goto end
 
 :mode_V0_AllAudio
-%ffmpeg1% -i %1 -c copy -map 0:v:0 -map 0:a %fn%
-goto end
-
-:mode_V0_A0_A1_(Neo)
-%ffmpeg1% -i %1 -c copy -map 0:v:0 -map 0:a:0 -map 0:a:1 %fn% 2>&1 | find /V "Skip ("
-goto end
-
-:mode_V1_A0_A1_(One)
-%ffmpeg1% -i %1 -c copy -map 0:v:1 -map 0:a:0 -map 0:a:1 %fn% 2>&1 | find /V "Skip ("
-goto end
-
-:mode_V4_AllAudio_(BR)
-%ffmpeg1% -i %1 -c copy -map 0:v:4 -map 0:a %fn% 2>&1 | find /V "Skip ("
-goto end
-
-:mode_V2_AllAudio_(RBB)
-%ffmpeg1% -i %1 -c copy -map 0:v:2 -map 0:a %fn% 2>&1 | find /V "Skip ("
-goto end
-
-:mode_Default_Timeshift_all
-%ffmpeg1% -live_start_index 1 -i %1 -c copy %fn% 2>&1 | find /V "Skip ("
-goto exit
-
-:mode_V3_A0_A1_(One)_Timeshift_all
-%ffmpeg1% -live_start_index 1 -i %1 -c copy -map 0:v:3 -map 0:a:0 -map 0:a:1 %fn% 2>&1 | find /V "Skip ("
-goto end
-
-:mode_V0_A0_A1_(Neo)_Timeshift_all
-%ffmpeg1% -live_start_index 1 -i %1 -c copy -map 0:v:0 -map 0:a:0 -map 0:a:1 %fn% 2>&1 | find /V "Skip ("
+%ffmpeg1% %~4 -i %1 -c copy -map 0:v:0 -map 0:a %fn% 2>&1 | find /V "Skip ("
 goto end
 
 :mode_Test

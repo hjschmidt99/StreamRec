@@ -35,7 +35,8 @@
 
       async function doCreate() {
         x = await saveParams();
-        x = await eel.doCreate(selChan.value, selMode.value, txtStart.value, txtEnd.value, txtTitle.value);
+        x = await eel.doCreate(selChan.value, selMode.value, txtStart.value, txtEnd.value, txtTitle.value,
+            chkUseMaps.checked, chkUseMaps.checked);
       }
 
       async function doCmd(cmd, p = null) {
@@ -88,6 +89,10 @@
           </tr><tr>
             <td>Title</td>
             <td colspan="2"><input type="search" id="txtTitle" class="max" save="value" /></td>
+          </tr><tr>
+            <td></td>
+            <td><input type="checkbox" id="chkUseMaps" />use stream maps&nbsp;&nbsp;
+            <input type="checkbox" id="chkFullTimeshift" />use full timeshift period</td>
           </tr><tr>
             <td></td>
             <td colspan="1">
