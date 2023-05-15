@@ -58,6 +58,7 @@ def createTask(folder, taskname, tstart, tend, xtool, xargs):
             '',  # No user
             '',  # No password
             TASK_LOGON_NONE)
+        return True
     except:
         traceback.print_exc()
-
+        return False
