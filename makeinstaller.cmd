@@ -1,4 +1,4 @@
-pyinstaller.exe --onefile ^
+pyinstaller.exe --onefile --noconsole ^
     --add-data="web;web" ^
     streamrec.py
 copy /y StreamRec.cmd dist\streamrec.cmd
