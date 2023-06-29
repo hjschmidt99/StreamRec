@@ -283,20 +283,9 @@ def processM3u(chan, url, dir):
     return p
 
 #cmdline_args = []    
-cmdline_args = [f"--window-position={xparam['x']},{xparam['y']}", f"--window-size={xparam['w']-20},{xparam['h']}", "–disable-translate", "–incognito"]
-cmdline_args1 = ["–disable-translate", "–incognito"]
-cmdline_args2 = ["–disable-translate", "–incognito", '--user-data-dir="D:\\dev\\StreamRec\\chrome"',
-                '--profile-directory="D:\\dev\\StreamRec\\chrome\\Default"']
-cmdline_args3 = ["--window-position=8000,0", "–disable-translate", "–incognito"]
-other_option_samples = ["--new-window", "--autoplay-policy=no-user-gesture-required", "--disable-translate",
-                "--disable-sync", "--no-first-run", "--no-default-browser-check", 
-                "--disable-component-extensions-with-background-pages", "--disable-default-apps",
-                "--disable-breakpad", "--disable-crashpad", "--disable-background-networking", 
-                "--disable-domain-reliability", "--disable-component-update", "--disable-sync",
-                "--disable-features=AutofillServerCommunication", "--in-process-gpu",
-                "--enable-gpu-rasterization" ,"--enable-zero-copy", "--ignore-gpu-blocklist", 
-                "--enable-hardware-overlays=single-fullscreen,single-on-top,underlay", 
-                "--disable-features=Vulkan"]
+cmdline_args = ["–disable-translate", "–incognito", 
+    f"--window-position={xparam['x']},{xparam['y']}", 
+    f"--window-size={xparam['w']-20},{xparam['h']}"]
 eel.start('main.html', 
     cmdline_args=cmdline_args, 
     port=xparam["port"], 
