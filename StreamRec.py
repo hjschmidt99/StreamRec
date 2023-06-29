@@ -1,3 +1,4 @@
+import HandleConsole as con
 import sys
 import os
 import json
@@ -11,19 +12,6 @@ import eel
 import clipboard
 import scheduler
 
-# console visibility
-conWin = win32gui.GetForegroundWindow()
-conOn = win32con.SW_SHOW
-conOff = win32con.SW_HIDE
-conToggle = -1
-def showConsole(mode):
-    global conState
-    mode = mode if mode != -1 else conOff if conState == conOn else conOn
-    conState = mode
-    if not "debugSession" in os.environ.keys():
-        win32gui.ShowWindow(conWin, mode)
-showConsole(conOff)
-
 eel.init('web')
 
 # default app parameters
@@ -33,7 +21,7 @@ xparam = {
     "w": 800,
     "h": 500,
     "port": 0,
-    "txtDir": r"D:\Download\Media",
+    "txtDir": r"%USERPROFILE%\Videos",
     "txtPlayer": r"C:\Program Files\DAUM\PotPlayer\PotPlayerMini64.exe",
     "txtOffset": "15",
     "txtCmdFile": "",
@@ -102,6 +90,7 @@ def getChannels():
         return getChannelsM3u(fnchan)
 
 # get channels from pls file
+# (opt. pls extensions Args1_x and Args2_x)
 def getChannelsPls(fname):
     global channels
     channels = {}
@@ -115,11 +104,17 @@ def getChannelsPls(fname):
         for i in range(1, int(len(pls.keys()) / 2)):
             k = f'Title{i}'
             v = f'File{i}'
+            a1 = f'Args1_{i}'
+            a2 = f'Args2_{i}'
             if k in pls.keys() and v in pls.keys(): 
-                channels[pls[k]] = { cUrl: pls[v] }
+                data = { cUrl: pls[v] }
+                if a1 in pls.keys(): data[cArgs1] = pls[a1]
+                if a2 in pls.keys(): data[cArgs2] = pls[a2]
+                channels[pls[k]] = data
     return list(channels.keys())
 
 # get channels from m3u file
+# (opt. m3u extensions #EXTARGS1 and #EXTARGS2)
 def getChannelsM3u(fname):
     global channels
     channels = {}
@@ -236,7 +231,7 @@ def doCmd(s, p):
     if (s == "Play"): cmd = f'"{xparam["txtPlayer"]}" "{channels[p][cUrl]}"'
     if (s == "Tasks"): cmd = f'taskschd.msc'
     if (s == "PlayList"): log = getPlayist(p)
-    if (s == "Console"): showConsole(conToggle)
+    if (s == "Console"): con.showConsole(con.conToggle)
     if (s == "Paste"): paste()
     if cmd:
         log = f'\ndoCmd ({s}, {p})\n{cmd}'
@@ -288,9 +283,20 @@ def processM3u(chan, url, dir):
     return p
 
 #cmdline_args = []    
-cmdline_args = ["–disable-translate", "–incognito"]
-#cmdline_args = ["--window-position=8000,0", "–disable-translate", "–incognito"]
-#cmdline_args = [f"--window-position={xparam['x']},{xparam['y']}", f"--window-size={xparam['w']},{xparam['h']}", "–disable-translate", "–incognito"]
+cmdline_args = [f"--window-position={xparam['x']},{xparam['y']}", f"--window-size={xparam['w']-20},{xparam['h']}", "–disable-translate", "–incognito"]
+cmdline_args1 = ["–disable-translate", "–incognito"]
+cmdline_args2 = ["–disable-translate", "–incognito", '--user-data-dir="D:\\dev\\StreamRec\\chrome"',
+                '--profile-directory="D:\\dev\\StreamRec\\chrome\\Default"']
+cmdline_args3 = ["--window-position=8000,0", "–disable-translate", "–incognito"]
+other_option_samples = ["--new-window", "--autoplay-policy=no-user-gesture-required", "--disable-translate",
+                "--disable-sync", "--no-first-run", "--no-default-browser-check", 
+                "--disable-component-extensions-with-background-pages", "--disable-default-apps",
+                "--disable-breakpad", "--disable-crashpad", "--disable-background-networking", 
+                "--disable-domain-reliability", "--disable-component-update", "--disable-sync",
+                "--disable-features=AutofillServerCommunication", "--in-process-gpu",
+                "--enable-gpu-rasterization" ,"--enable-zero-copy", "--ignore-gpu-blocklist", 
+                "--enable-hardware-overlays=single-fullscreen,single-on-top,underlay", 
+                "--disable-features=Vulkan"]
 eel.start('main.html', 
     cmdline_args=cmdline_args, 
     port=xparam["port"], 
