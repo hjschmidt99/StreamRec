@@ -48,61 +48,79 @@
                 txta.style.height = (window.innerHeight - txta.offsetTop - 2 * txta.offsetLeft) + "px"
             }
             
-            function opt() {
-                reload();
-                toggleShow('divMain');
-                toggleShow('divOpt');
-            }
+            function selTab(evt, tabName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+
+                document.getElementById(tabName).style.display = "block";
+                evt.currentTarget.className += " active";
+                resize();
+            } 
         </script>
     </head>
 
     <body id="body" style="overflow:hidden;" onresize="resize()">
         <style>
             * { font-family: arial; font-size: 10pt; vertical-align: middle; }
-            .max { width:100%; padding:2px; }
-            .hide { display:none }
-            .btn { width:80px; height:26px; margin-top:2px; background-color: black; color:white}
-            .img { width:24px; height:24px; display: inline; }
+            .max { width: 100%; padding: 2px; }
+            .hide { display: none }
+            .btn { width: 80px; height: 26px; margin-top: 2px; background-color: black; color: white; }
+            .img { width: 24px; height: 24px; display: inline; }
             .header { font-size: 12pt; font-weight: bold; }
             table { border-collapse: separate; border-spacing: 2px 2px; }
             tr, td, body, a { background-color: rgb(80,80,80); color: white; }
             #divInfo { margin: 0px 10px 0px 2px; } /* fix textarea width */
+            .tab { overflow: hidden; background-color: inherit; }
+            .tab button { color: white; background-color: inherit; float: left; border: none; padding: 4px 10px; }
+            .tab button.active { background-color: #202020; }
+            .tabcontent { display: none; }
         </style>
-        <div id=divMain class=max style="display:inline;" >
-            <span class=header>Event:</span>
+        <div class="tab">
+            <button class="tablinks" id="defaultTab" onclick="selTab(event, 'divEvent')">Event</button>
+            <button class="tablinks" onclick="selTab(event, 'divSettings')">Settings</button>
+        </div>
+        <hr style="margin-top:0px;">
+        <div id="divEvent" class="tabcontent" >
             <table width="100%">
                 <colgroup>
                     <col style="width: 90px">
-                    <col style="width: 80%">
-                    <col style="width: 8%">
+                    <col style="width: 88%">
                 </colgroup>
                 <tr>
                     <td><a href=# title="click to reload files" onclick="reload()">Channel</a></td>
-                    <td colspan="2"><select id="selChan" class="max" save="select"></select></td>
+                    <td><select id="selChan" class="max" save="select"></select></td>
                 </tr><tr>
                     <td><a href=# title="click to reload files" onclick="reload()">Mode</a></td>
-                    <td colspan="2"><select id="selMode" class="max" save="select"></select></td>
+                    <td><select id="selMode" class="max" save="select"></select></td>
                 </tr><tr>
                     <td><a href=# title="click to paste from clipboard" onclick="doCmd('Paste')">Start</a></td>
-                    <td colspan="2"><input type="search" id="txtStart" class="max" save="value" /></td>
+                    <td><input type="search" id="txtStart" class="max" save="value" /></td>
                 </tr><tr>
                     <td>End</td>
-                    <td colspan="2"><input type="search" id="txtEnd" class="max" save="value" /></td>
+                    <td><input type="search" id="txtEnd" class="max" save="value" /></td>
                 </tr><tr>
                     <td>Title</td>
-                    <td colspan="2"><input type="search" id="txtTitle" class="max" save="value" /></td>
+                    <td><input type="search" id="txtTitle" class="max" save="value" /></td>
                 </tr><tr>
                     <td></td>
                     <td><input type="checkbox" id="chkUseMaps" />use stream maps&nbsp;&nbsp;
                         <input type="checkbox" id="chkFullTimeshift" />use full timeshift period</td>
                 </tr><tr>
                     <td></td>
-                    <td colspan="1">
+                    <td>
                         <button class="btn" onclick="doCreate()">Create</button>
                         <button class="btn" onclick="doCmd('PlayList', selChan.value)">PlayList</button>
                         <button class="btn" onclick="doCmd('Play', selChan.value)">Play</button>
+                        <image class="img" src="ant2t.gif" />
                     </td>
-                    <td><image class="img" src="ant2t.gif" /></td>
                 </tr><tr>
                     <td></td>
                     <td colspan="1">
@@ -110,16 +128,10 @@
                         <button class="btn" onclick="doCmd('ChanFile')">ChanFile</button>
                         <button class="btn" onclick="doCmd('Tasks')">Tasks</button>
                     </td>
-                    <td style="white-space:nowrap;">
-                        <image class="img" title="show/hide options" onclick="opt()" src="settings.png" />
-                        <!--<image class="img" title="refresh list" onclick="reload()" src="refresh2.png" />-->
-                        <!--<image class="img" title="show/hide console" onclick="doCmd('Console')" src="console1.png" />-->
-                    </td>
                 </tr>
             </table>
         </div>
-        <div id=divOpt class=max style="display:none;" >
-            <span class=header>Settings:</span>
+        <div id="divSettings" class="tabcontent" >
             <table width="100%">
                 <colgroup>
                     <col style="width: 90px">
@@ -143,12 +155,12 @@
                 </tr><tr>
                     <td></td>
                     <td><input type="checkbox" id="chkSavePlaylist" save="checked" />save playlists to disk</td>
-                </tr><tr>
-                    <td></td>
-                    <td><button class="btn" onclick="opt()">Back</button></td>
                 </tr>
             </table>
         </div>
         <div id="divInfo">Info:<br/><textarea id="txta" class="max" style="resize:none;"></textarea></div>
     </body>
+    <script>
+        document.getElementById("defaultTab").click();
+    </script>
 </html>
