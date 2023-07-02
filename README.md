@@ -59,15 +59,24 @@ See the m3u8 file for examples.
 
 The #EXTARGS1 of the channel will always be used if available, e.g. to specify a referrer.
 
-The "use stream maps" chackbox will enable the #EXTARGS2 of the channel if available, e.g. for audio maps. 
-When unchecked no mapping is done and ffmpeg takes the best video amd the best audio track (i.e. 1 video and 1 audio track).
+The "use stream maps" chackbox on the UI will enable the #EXTARGS2 of the channel if available, e.g. for audio maps. 
+When unchecked no mapping is done and ffmpeg takes the best video amd the best audio track by default (i.e. 1 video and 1 audio track).
 
 The "use full timeshift period" chackbox adds " -live_start_index 1" to #EXTARGS1. 
-If I missed the start time of a program there is still a chance to record it if the channel provides timeshift in its player. 
+If I missed the start time of a program, there is still a chance to record it, if the channel provides timeshift in its player. 
 E.g. ARD allows 2h timeshift, ZDF 3h, but ARTE only 1min.
 Check setting "save playlists to disk" and click button Playlist for the selected channel. Look into the playlist files to see the time range they contain.
 
+## Command File
 
+This file is started by the Windows task scheduler. 
+It contains the ffmpeg commands for the defined modes, parameterized by the cmd file's arguments.
+
+Sometimes I experience broken internet connections resulting in truncated recordings. 
+This may be caused by the internet provider (e.g. a reset per day), overload at the video provider (prime time), etc.
+
+To deal with that the cmd file implements an automatic restart of ffmpeg with a numbered file name (auto increment). 
+The restarted recording also starts 50 m3u parts in the past (-live_start_index -50), so in best case (short internet connection break and sufficient m3u time coverage) both recorded files will overlap and can be stitched together seamlessly with a video editor.
 
 
 
