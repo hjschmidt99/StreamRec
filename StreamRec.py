@@ -285,7 +285,7 @@ def processM3u(chan, url, dir):
 #cmdline_args = []    
 cmdline_args = ["–disable-translate", "–incognito", 
     f"--window-position={xparam['x']},{xparam['y']}", 
-    f"--window-size={xparam['w']-20},{xparam['h']}"]
+    f"--window-size={xparam['w']},{xparam['h']}"]
 eel.start('main.html', 
     cmdline_args=cmdline_args, 
     port=xparam["port"], 
