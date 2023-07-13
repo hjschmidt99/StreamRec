@@ -157,9 +157,9 @@ def toFilename(s):
     s = s.replace(":", "-")
     s = s.replace("\"", "-")
     s = s.replace("/", "-")
-    s = s.replace(".", "-")
-    s = s.replace(",", "-")
-    s = s.replace(";", "-")
+    #s = s.replace(".", "-")
+    #s = s.replace(",", "-")
+    #s = s.replace(";", "-")
     s = s.replace("  ", " ")
     return s.strip()
 
