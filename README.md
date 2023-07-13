@@ -13,18 +13,18 @@ Briefly
 - Clicking the "Create" button will add an event to the Windows task scheduler with the given parameters.
 
 Buttons in the Events tab:
-- Create: schedule recording.
-- Playlist: show the m3u8 document of the currently selected channel.
-- Play: one the live stream in the video player configured in the settings.
-- Tasks: show the Windows task scheduler. Your planned recordings can be found in the Record folder.
-- CmdFile: edit the command file with your different modes (FFmpeg commands)-
+- Create: Schedule recording from the edited/selected entries.
+- Playlist: Show the m3u8 document of the currently selected channel.
+- Play: Start the live stream in the video player configured in the settings.
+- Tasks: Show the Windows task scheduler. Your planned recordings can be found in the Record folder.
+- CmdFile: Edit the command file with your different modes (FFmpeg commands)-
 - ChanFile: Edit the channel file (playlist).
 
 Settings tab:
 - Download directory where to save the recordings.
 - Offset: Number of minutes to extend start and end time when pasting via the Start label (see below).
-- Player: the video player application the be used with the Play button.
-- CmdFile
+- Player: The video player application the be used with the Play button.
+- CmdFile: It is started by the scheduler and does the real recording work. On first start this file must be edited to set the proper ffmpeg file location on your system.
 - ChannelFile
 - save playlists to disk: write m3u8 playlist files collected via the Playlist button to disk for further inspection.
 
@@ -64,7 +64,7 @@ When unchecked no mapping is done and ffmpeg takes the best video amd the best a
 
 The "use full timeshift period" chackbox adds " -live_start_index 1" to #EXTARGS1. 
 If I missed the start time of a program, there is still a chance to record it, if the channel provides timeshift in its player. 
-E.g. ARD allows 2h timeshift, ZDF 3h, but ARTE only 1min.
+E.g. ARD allows 2h timeshift, ZDF 3h, but ARTE only 1min etc..
 Check setting "save playlists to disk" and click button Playlist for the selected channel. Look into the playlist files to see the time range they contain.
 
 ## Command File
