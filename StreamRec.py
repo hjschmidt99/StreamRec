@@ -27,6 +27,7 @@ xparam = {
     "txtCmdFile": "",
     "txtChannelFile": "",
     "chkSavePlaylist": False,
+    "chkClipmon": False,
 }
 
 tFormatUi = "%d.%m.%Y %H:%M"
@@ -36,6 +37,7 @@ fn = os.path.splitext(os.path.abspath(sys.argv[0]))[0]
 fncfg = fn + ".json"
 fncmd = fn + ".cmd"
 fnchan = fn + ".m3u8"
+fntxt = fn + "If.txt"
 if os.path.exists(fncfg):
     with open(fncfg, 'r') as f1:
         x = json.load(f1)
@@ -195,10 +197,8 @@ def doCreate(chan, mode, start, end, title, useMaps, fullTimeshift):
     except:
         traceback.print_exc()
 
-# paste event from clipboard, e.g. copied from TV-Browser
-def paste():
+def decodePaste(s):
     try:
-        s = clipboard.paste()
         print(s)
         # 12.04.2019 21:45–23:20 - ARD-alpha - Fawlty Towers
         s = s.replace("–", "-").strip()
@@ -218,6 +218,14 @@ def paste():
         tend = datetime.strftime(tend + offset, tFormatUi)
         eel.prl(f'\npaste from clipboard:\n{s}')
         eel.pasteResult(tstart, tend, chan, title)
+    except:
+        traceback.print_exc()
+
+# paste event from clipboard, e.g. copied from TV-Browser
+def paste():
+    try:
+        s = clipboard.paste()
+        decodePaste(s)
     except:
         traceback.print_exc()
 
@@ -291,6 +299,31 @@ eel.start('main.html',
     port=xparam["port"], 
     position=(xparam["x"], xparam["y"]), 
     size=(xparam["w"], xparam["h"]),
-    block=True)
+    block=False)
 
-#while (True): eel.sleep(1)
+# non-blocking eel reqires a loop 
+# we can use it for file/clipboard monitoring/polling
+
+lastClip = ""
+lastexp = None
+while True:
+    eel.sleep(1.0)  
+
+    try: 
+        # check clipboard for changes
+        if xparam["chkClipmon"]:
+            clip = clipboard.paste()
+            if clip and clip != lastClip:
+                decodePaste(clip)
+                lastClip = clip
+ 
+        if os.path.exists(fntxt):
+            with open(fntxt, 'r', encoding="cp1250") as f1:
+                x = f1.readline()
+                decodePaste(x)
+            os.remove(fntxt)
+
+    except:
+        lastexp = traceback.format_exc()
+        print(lastexp)
+ 
