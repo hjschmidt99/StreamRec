@@ -151,6 +151,9 @@ https://s6.hopslan.com/disneyc/tracks-v1a1/mono.m3u8?token=%2A
 #EXTARGS1: -headers Referer:https://www.livestreamde.com/
 https://stream.hdtvizlecanli.com/disneyger2.m3u8
 
+#EXTINF:-1,Disney Channel2
+https://fernsehzone.online/stream123.php/disneyger2.m3u8
+
 #EXTINF:-1,RTL
 https://content.pzaz.tv/content-live/de-rtl/tracks-v2a1/mono.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9NC8xOC8yMDIzIDg6NTE6MzQgUE0maGFzaF92YWx1ZT1aOCtha3dBdXFkK09sZ0hiVEJnYUN3PT0mdmFsaWRtaW51dGVzPTE0NDAmaWQ9YWU5NzlkYjQtNTYwNy00YmZjLThjYTAtNmNhMjVhMTVlYWFj
 
