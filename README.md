@@ -12,6 +12,8 @@ Briefly
 - Start time, end time and title of the recording are entered in text boxes.
 - Clicking the "Create" button will add an event to the Windows task scheduler with the given parameters.
 
+Edit the command file to set the proper ffmpeg file location on your system. You may also add modes, e.g. for special track mappings, on the fly transcoding etc.
+
 Buttons in the Events tab:
 - Create: Schedule recording from the edited/selected entries.
 - Playlist: Show the m3u8 document of the currently selected channel.
