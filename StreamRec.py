@@ -318,7 +318,7 @@ while True:
                 lastClip = clip
  
         if os.path.exists(fntxt):
-            with open(fntxt, 'r', encoding="cp1250") as f1:
+            with open(fntxt, 'r', encoding="utf-16le") as f1:
                 x = f1.readline()
                 decodePaste(x)
             os.remove(fntxt)
