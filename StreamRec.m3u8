@@ -50,7 +50,7 @@ https://srfs.akamaized.net/hls/live/689649/srfsgeo/index.m3u8
 https://mcdn.br.de/br/fs/ard_alpha/hls/de/master.m3u8
 
 #EXTINF:-1,One
-#EXTARGS2: -map 0:v:1 -map 0:a:0 -map 0:a:1 
+#EXTARGS2: -map 0:v:2 -map 0:a:0 -map 0:a:2 
 https://mcdn.one.ard.de/ardone/hls/master.m3u8
 
 #EXTINF:-1,tagesschau24
@@ -61,6 +61,7 @@ https://zdf-hls-17.akamaized.net/hls/live/2016500/de/high/master.m3u8
 
 #EXTINF:-1,ZDFneo
 #EXTARGS2: -map 0:v:0 -map 0:a:0 -map 0:a:1 
+###EXTARGS2: -map 0:v:0 -map 0:a 
 https://zdf-hls-16.akamaized.net/hls/live/2016499/de/veryhigh/master.m3u8
 
 #EXTINF:-1,DW
@@ -145,13 +146,18 @@ https://brevent.akamaized.net/hls/live/2028222/event_05/master.m3u8
 
 
 #EXTINF:-1,Disney Channel
-https://s6.hopslan.com/disneyc/tracks-v1a1/mono.m3u8?token=%2A
+#https://s6.hopslan.com/disneyc/tracks-v1a1/mono.m3u8?token=%2A
+#https://s6.hopslan.com/disneyx1/tracks-v1a1/mono.m3u8
+https://s6.hopslan.com/disneyx1/index.m3u8
 
 #EXTINF:-1,Disney Channel1
+https://s6.hopslan.com/disneyc/tracks-v1a1/mono.m3u8?token=%2A
+
+#EXTINF:-1,Disney Channel2
 #EXTARGS1: -headers Referer:https://www.livestreamde.com/
 https://stream.hdtvizlecanli.com/disneyger2.m3u8
 
-#EXTINF:-1,Disney Channel2
+#EXTINF:-1,Disney Channel3
 https://fernsehzone.online/stream123.php/disneyger2.m3u8
 
 #EXTINF:-1,RTL
@@ -215,4 +221,21 @@ https://s6.hopslan.com/orf1/index.m3u8
 
 #EXTINF:-1,ORF 2
 https://s6.hopslan.com/orf2/index.m3u8
+
+
+
+
+
+#EXTINF:-1,MovieSphere
+https://moviesphere-plex.amagi.tv/playlist.m3u8
+
+#EXTINF:-1,Rakuten Action Movies
+###https://rakuten-actionmovies-1-eu.rakuten.wurl.tv/playlist.m3u8
+https://rakuten-actionmovies-1-eu.rakuten.wurl.tv/3000.m3u8
+
+#EXTINF:-1,Paramount
+http://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5cb0cae7a461406ffe3f5213/master.m3u8?advertisingId=91a6ae51-6f9d-4fbb-adb0-bdfffa44693e&appVersion=unknown&deviceDNT=0&deviceId=91a6ae51-6f9d-4fbb-adb0-bdfffa44693e&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceUA=samsung/SM-T720/10&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain=,https://play.google.com/store/apps/details?id=com.samsung.android.tvplus&samsung_app_name=Mobile+TV+Plus&us_privacy=1YNY
+
+
+
 
