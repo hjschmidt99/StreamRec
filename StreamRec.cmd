@@ -10,6 +10,7 @@ set ffmpeg="D:\Programme\ffmpeg\bin\ffmpeg.exe"
 set args1=-http_persistent 0 -analyzeduration 15000000 -ignore_unknown
 set ffmpeg1=%ffmpeg% %args1%
 set x264=-c:v libx264 -profile:v high -pix_fmt yuv420p -movflags +faststart -g 25 -bf 2
+set aac=-acodec aac -ar 44100 -ac 2 -profile:a 1
 
 set n=0
 set fn=%2
@@ -29,7 +30,7 @@ goto end
 goto end
 
 :mode_Xcode_V2400_AllAudio
-%ffmpeg1% -i %1 %x264% -b:v 2400k -acodec copy -map 0:v:0 -map 0:a %fn% 2>&1 | find /V "Skip ("
+%ffmpeg1% -i %1 %x264% -b:v 2400k %aac% -b:a 128k -map 0:v:0 -map 0:a %fn% 2>&1 | find /V "Skip ("
 goto end
 
 :mode_Test
