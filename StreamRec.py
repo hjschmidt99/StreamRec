@@ -11,6 +11,7 @@ import win32gui, win32con
 import eel
 import clipboard
 import scheduler
+import re
 
 eel.init('web')
 
@@ -260,17 +261,64 @@ def doCmd(s, p):
     #return(log)
 
 def getPlayist(chan):
-    url = channels[chan][cUrl]
-    p1 = ""
-    if not xparam["chkSavePlaylist"]: 
-        with urllib.request.urlopen(url) as response:
-            rsp = response.read()
-        p1 = rsp.decode("utf-8")
-    else:
-        p1 = processM3u(chan, url, xparam["txtDir"])
-    s = f'\nChannel: {chan}\n{url}\n{p1}\n\n'
-    print(s)
-    return s
+    try:
+        url = channels[chan][cUrl]
+        p1 = ""
+        items = []
+        if not xparam["chkSavePlaylist"]: 
+            p1 = decodeM3u(chan, url, items)
+            print(items)
+        else:
+            p1 = processM3u(chan, url, xparam["txtDir"])
+        s1 = json.dumps(items, indent=4)
+        s = f'\nChannel: {chan}\n{url}\n{p1}\n{s1}\n\n'
+        print(s)
+        return s
+    except:
+        traceback.print_exc()
+
+# regex to split by comma, but notinside quotes
+COMMA_MATCHER = re.compile(r",(?=(?:[^\"']*[\"'][^\"']*[\"'])*[^\"']*$)")
+
+def toDict(s):
+    d1 = {}
+    l1 = COMMA_MATCHER.split(s)
+    for e in l1:
+        l2 = e.split("=")
+        d1[l2[0]] = l2[1].strip('"')
+    return d1
+
+def decodeM3u(chan, url, items):
+    with urllib.request.urlopen(url) as response:
+        rsp = response.read()
+    p = rsp.decode("utf-8")
+    p1 = p.splitlines()
+    baseUrl = url.rsplit("/", 1)[0] + "/"
+    tag1 = "#EXT-X-STREAM-INF:"
+    tag2 = "#EXT-X-MEDIA:"
+
+    for ix1, x1 in enumerate(p1):
+        if x1.startswith(tag1):
+            t1 = x1.partition(tag1)[2]
+            s1 = toDict(t1)
+            url1 = p1[ix1 + 1]
+            # make relative urls absolute
+            if not url1.startswith("http"):
+                url1 = baseUrl + url1
+            s1["URL"] = url1
+            s1 = { "TYPE": "VIDEO" } | s1
+            items.append(s1)
+
+        if x1.startswith(tag2):
+            t1 = x1.partition(tag2)[2]
+            s1 = toDict(t1)
+            if "URI" in s1:
+                url1 = s1["URI"]
+                if not url1.startswith("http"):
+                    url1 = baseUrl + url1
+                s1["URL"] = url1
+            items.append(s1)
+    return p
 
 def processM3u(chan, url, dir):
     with urllib.request.urlopen(url) as response:
