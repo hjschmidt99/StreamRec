@@ -238,4 +238,27 @@ http://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5cb0cae7a4
 
 
 
+#EXTINF:-1,RakutenTop
+https://a6fa08d757884cf9994344c24b948fc6.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-de_TopFree/50bc99bb-fb75-4562-9e89-176f02e5b8bb/2.m3u8
+
+#EXTINF:-1,RakutenAction
+https://d35b7cc78d1349babeb4c5f015699464.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-de_RakutenActionMovies/5598f299-5914-4d08-8fb7-320163be216c/2.m3u8
+
+#EXTINF:-1,RakutenComedy
+https://ef43576fea7e4475bafdedc078f5738b.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-de_RakutenComedyMovies/81a0169b-f446-47c0-af82-01ae64e4b126/2.m3u8
+
+#EXTINF:-1,RakutenDrama
+https://67d66914daeb4e91ae8564deea8ce2af.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-de_RakutenTVShows/1231b156-77bb-4f0f-ad60-579be83828f7/2.m3u8
+
+#EXTINF:-1,RakutenThriller
+https://5bcd094bbfe94b3390cab03bef63bee5.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-de_RakutenThriller/61c7446d-9d80-4e33-9ee9-63e6597be418/2.m3u8
+
+#EXTINF:-1,RakutenRomantik
+https://8bd243f0856747b4aa9ae0716bc2c79e.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-de_RakutenRomance/cfb5ca37-72e9-48fc-82a4-cc369e9168b7/2.m3u8
+
+#EXTINF:-1,RakutenUtopja
+https://d46c0ebf9ef94053848fdd7b1f2f6b90.mediatailor.eu-central-1.amazonaws.com/v1/manifest/81bfcafb76f9c947b24574657a9ce7fe14ad75c0/live-prod/86dcbc89-1a0e-4673-841f-6f7f4b705106/0.m3u8
+
+
+
 

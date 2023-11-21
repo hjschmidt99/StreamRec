@@ -24,6 +24,7 @@ xparam = {
     "txtDir": r"%USERPROFILE%\Videos",
     "txtPlayer": r"C:\Program Files\DAUM\PotPlayer\PotPlayerMini64.exe",
     "txtOffset": "15",
+    "txtDefaultDuration": "150",
     "txtCmdFile": "",
     "txtChannelFile": "",
     "chkSavePlaylist": False,
@@ -229,6 +230,16 @@ def paste():
     except:
         traceback.print_exc()
 
+def planNow():
+    try:
+        dur = timedelta(minutes=int(xparam["txtDefaultDuration"]))
+        tstart = datetime.strftime(datetime.now(), tFormatUi)
+        tend = datetime.strftime(datetime.now() + dur, tFormatUi)
+        eel.prl(f'\nplan for now')
+        eel.pasteResult(tstart, tend, None, None)
+    except:
+        traceback.print_exc()
+
 @eel.expose
 def doCmd(s, p):
     print(f'doCmd {s}, {p}')
@@ -241,6 +252,7 @@ def doCmd(s, p):
     if (s == "PlayList"): log = getPlayist(p)
     if (s == "Console"): con.showConsole(con.conToggle)
     if (s == "Paste"): paste()
+    if (s == "PlanNow"): planNow()
     if cmd:
         log = f'\ndoCmd ({s}, {p})\n{cmd}'
         subprocess.Popen(cmd, shell=True)

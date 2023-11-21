@@ -29,8 +29,8 @@ goto end
 %ffmpeg1% %~4 -i %1 -c copy -map 0:v:0 -map 0:a %fn% 2>&1 | find /V "Skip ("
 goto end
 
-:mode_Xcode_V2400_AllAudio
-%ffmpeg1% -i %1 %x264% -b:v 2400k %aac% -b:a 128k -map 0:v:0 -map 0:a %fn% 2>&1 | find /V "Skip ("
+:mode_Xcode_V2400_A0
+%ffmpeg1% -i %1 %x264% -b:v 2400k %aac% -b:a 128k -map 0:v:0 -map 0:a:0 %fn% 2>&1 | find /V "Skip ("
 goto end
 
 :mode_Test

@@ -32,8 +32,8 @@
             function pasteResult(tstart, tend, chan, title) {
                 txtStart.value = tstart;
                 txtEnd.value = tend;
-                selChan.value = chan;
-                txtTitle.value = title;
+                if (chan !== null) selChan.value = chan;
+                if (title !== null) txtTitle.value = title;
             }
 
             async function doCreate() {
@@ -95,7 +95,7 @@
         <div id="divEvent" class="tabcontent" >
             <table width="100%">
                 <colgroup>
-                    <col style="width: 90px">
+                    <col style="width: 120px">
                     <col style="width: 88%">
                 </colgroup>
                 <tr>
@@ -108,7 +108,7 @@
                     <td><a href=# title="click to paste from clipboard" onclick="doCmd('Paste')">Start</a></td>
                     <td><input type="search" id="txtStart" class="max" save="value" /></td>
                 </tr><tr>
-                    <td>End</td>
+                    <td><a href=# title="click to plan event for nnow" onclick="doCmd('PlanNow')">End</a></td>
                     <td><input type="search" id="txtEnd" class="max" save="value" /></td>
                 </tr><tr>
                     <td>Title</td>
@@ -138,7 +138,7 @@
         <div id="divSettings" class="tabcontent" >
             <table width="100%">
                 <colgroup>
-                    <col style="width: 90px">
+                    <col style="width: 120px">
                     <col style="width: 88%">
                 </colgroup>
                 <tr>
@@ -147,6 +147,9 @@
                 </tr><tr>
                     <td>Offset</td>
                     <td><input type="search" id="txtOffset" class="max" save="value" /></td>
+                </tr><tr>
+                    <td>Def. Dur.</td>
+                    <td><input type="search" id="txtDefaultDuration" class="max" save="value" /></td>
                 </tr><tr>
                     <td>Player</td>
                     <td><input type="search" id="txtPlayer" class="max" save="value" /></td>
