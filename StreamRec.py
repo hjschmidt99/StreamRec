@@ -11,7 +11,7 @@ import win32gui, win32con
 import eel
 import clipboard
 import scheduler
-import DecodeM3u 
+import HandleM3u 
 
 eel.init('web')
 
@@ -166,7 +166,7 @@ def doCreate(chan, mode, start, end, title, useMaps, fullTimeshift):
         if tstart < now: tstart = now + timedelta(seconds=5)
         if tend < now: tend = now + timedelta(minutes=6)
         
-        taskname = DecodeM3u.toFilename(f'Rec_{tstart.isoformat()}_{chan} - {title}')
+        taskname = HandleM3u.toFilename(f'Rec_{tstart.isoformat()}_{chan} - {title}')
         destfile = f'{xparam["txtDir"]}\\{taskname}.ts'
         folder = "\\Record"
         exe = "cmd.exe"
@@ -248,9 +248,9 @@ def getPlayist(chan):
     try:
         url = channels[chan][cUrl]
         p1 = ""
-        items = DecodeM3u.decodeM3u(url, chan)
+        items = HandleM3u.decodeM3u(url, chan)
         if xparam["chkSavePlaylist"]: 
-            p1 = DecodeM3u.processM3u(url, xparam["txtDir"], chan)
+            p1 = HandleM3u.processM3u(url, xparam["txtDir"], chan)
         s1 = json.dumps(items, indent=4)
         s = f'\nChannel: {chan}\n{url}\n{p1}\n{s1}\n\n'
         print(s)
