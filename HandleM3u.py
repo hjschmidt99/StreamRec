@@ -12,7 +12,10 @@ def toDict(s):
     l1 = COMMA_MATCHER.split(s)
     for e in l1:
         l2 = e.split("=")
-        d1[l2[0]] = l2[1].strip('"')
+        v = l2[1].strip('"')
+        if v.isnumeric():
+            v = int(v)
+        d1[l2[0]] = v
     return d1
 
 # make string a valid filename
