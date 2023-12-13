@@ -4,10 +4,7 @@ import os
 import json
 import subprocess
 import traceback
-import urllib.request
-import urllib.parse
 from datetime import datetime, timedelta
-import win32gui, win32con
 import eel
 import clipboard
 import scheduler

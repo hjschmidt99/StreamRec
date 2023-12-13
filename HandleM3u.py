@@ -1,13 +1,7 @@
-import HandleConsole as con
 import sys
 import os
-import json
-import subprocess
-import traceback
 import urllib.request
 import urllib.parse
-from datetime import datetime, timedelta
-import clipboard
 import re
 
 # regex to split by comma, but not inside quotes
