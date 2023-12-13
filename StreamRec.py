@@ -11,7 +11,7 @@ import win32gui, win32con
 import eel
 import clipboard
 import scheduler
-import re
+import DecodeM3u 
 
 eel.init('web')
 
@@ -151,22 +151,6 @@ def getChannelsM3u(fname):
 def dump(o):
     print(json.dumps(o, indent=4))
 
-# make string a valid filename
-def toFilename(s):
-    s = s.replace("\r", "")
-    s = s.replace("\n", " - ")
-    s = s.replace("\t", " ")
-    s = s.replace("?", " ")
-    s = s.replace("*", " ")
-    s = s.replace(":", "-")
-    s = s.replace("\"", "-")
-    s = s.replace("/", "-")
-    #s = s.replace(".", "-")
-    #s = s.replace(",", "-")
-    #s = s.replace(";", "-")
-    s = s.replace("  ", " ")
-    return s.strip()
-
 # create task
 @eel.expose
 def doCreate(chan, mode, start, end, title, useMaps, fullTimeshift):
@@ -182,7 +166,7 @@ def doCreate(chan, mode, start, end, title, useMaps, fullTimeshift):
         if tstart < now: tstart = now + timedelta(seconds=5)
         if tend < now: tend = now + timedelta(minutes=6)
         
-        taskname = toFilename(f'Rec_{tstart.isoformat()}_{chan} - {title}')
+        taskname = DecodeM3u.toFilename(f'Rec_{tstart.isoformat()}_{chan} - {title}')
         destfile = f'{xparam["txtDir"]}\\{taskname}.ts'
         folder = "\\Record"
         exe = "cmd.exe"
@@ -264,91 +248,15 @@ def getPlayist(chan):
     try:
         url = channels[chan][cUrl]
         p1 = ""
-        items = []
-        if not xparam["chkSavePlaylist"]: 
-            p1 = decodeM3u(chan, url, items)
-            print(items)
-        else:
-            p1 = processM3u(chan, url, xparam["txtDir"])
+        items = DecodeM3u.decodeM3u(url, chan)
+        if xparam["chkSavePlaylist"]: 
+            p1 = DecodeM3u.processM3u(url, xparam["txtDir"], chan)
         s1 = json.dumps(items, indent=4)
         s = f'\nChannel: {chan}\n{url}\n{p1}\n{s1}\n\n'
         print(s)
         return s
     except:
         traceback.print_exc()
-
-# regex to split by comma, but notinside quotes
-COMMA_MATCHER = re.compile(r",(?=(?:[^\"']*[\"'][^\"']*[\"'])*[^\"']*$)")
-
-def toDict(s):
-    d1 = {}
-    l1 = COMMA_MATCHER.split(s)
-    for e in l1:
-        l2 = e.split("=")
-        d1[l2[0]] = l2[1].strip('"')
-    return d1
-
-def decodeM3u(chan, url, items):
-    with urllib.request.urlopen(url) as response:
-        rsp = response.read()
-    p = rsp.decode("utf-8")
-    p1 = p.splitlines()
-    baseUrl = url.rsplit("/", 1)[0] + "/"
-    tag1 = "#EXT-X-STREAM-INF:"
-    tag2 = "#EXT-X-MEDIA:"
-
-    for ix1, x1 in enumerate(p1):
-        if x1.startswith(tag1):
-            t1 = x1.partition(tag1)[2]
-            s1 = toDict(t1)
-            url1 = p1[ix1 + 1]
-            # make relative urls absolute
-            if not url1.startswith("http"):
-                url1 = baseUrl + url1
-            s1["URL"] = url1
-            s1 = { "TYPE": "VIDEO" } | s1
-            items.append(s1)
-
-        if x1.startswith(tag2):
-            t1 = x1.partition(tag2)[2]
-            s1 = toDict(t1)
-            if "URI" in s1:
-                url1 = s1["URI"]
-                if not url1.startswith("http"):
-                    url1 = baseUrl + url1
-                s1["URL"] = url1
-            items.append(s1)
-    return p
-
-def processM3u(chan, url, dir):
-    with urllib.request.urlopen(url) as response:
-        rsp = response.read()
-    p = rsp.decode("utf-8")
-    p1 = p.splitlines()
-
-    savenext1 = False
-    savenext2 = False
-    for ix1, x1 in enumerate(p1):
-        if savenext1 or savenext2:
-            url2 = x1
-            # make relative urls absolute
-            if not url2.startswith("http"):
-                url2 = url.rsplit("/", 1)[0] + "/" + url2
-                p1[ix1] = url2
-
-            if savenext1:
-                processM3u(chan, url2, dir)
-
-        savenext1 = x1.startswith("#EXT-X-STREAM-INF") 
-        savenext2 = x1.startswith("#EXTINF")
-
-    fn1 = url.split("?")[0]
-    fn1 = toFilename(chan) + "-" + os.path.basename(fn1)
-    fn1 = os.path.join(dir, fn1)
-    with open(fn1, 'w') as f1:
-        f1.write("\n". join(p1))
-
-    return p
 
 #cmdline_args = []    
 cmdline_args = ["–disable-translate", "–incognito", 
