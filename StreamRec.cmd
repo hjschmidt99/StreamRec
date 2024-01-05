@@ -33,8 +33,13 @@ goto end
 %ffmpeg1% -i %1 %x264% -b:v 2400k %aac% -b:a 128k %fn% 2>&1 | find /V "Skip ("
 goto end
 
+:mode_Test1
+set ffmpeg1=%ffmpeg% %args1% -live_start_index -500
+%ffmpeg1% %~4 -i %1 -c copy %~5 %fn% 2>&1 | find /V "Skip ("
+goto end
+
 :mode_Test
-set ffmpeg2=%ffmpeg% %args1% -reconnect 1 -reconnect_streamed 1 -reconnect_on_network_error 1 -reconnect_delay_max 2
+::set ffmpeg2=%ffmpeg% %args1% -reconnect 1 -reconnect_streamed 1 -reconnect_on_network_error 1 -reconnect_delay_max 2
 ::set ffmpeg2=%ffmpeg% %args1% -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 2
 ::%ffmpeg2% -i %1 -c copy %fn%
 %ffmpeg2% -i %1 -c copy -map 0:v:3 -map 0:a:0 -map 0:a:5 %fn% 2>&1 | find /V "Skip ("

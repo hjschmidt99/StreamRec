@@ -148,10 +148,11 @@ https://brevent.akamaized.net/hls/live/2028222/event_05/master.m3u8
 #EXTINF:-1,Disney Channel
 #https://s6.hopslan.com/disneyc/tracks-v1a1/mono.m3u8?token=%2A
 #https://s6.hopslan.com/disneyx1/tracks-v1a1/mono.m3u8
-https://s6.hopslan.com/disneyx1/index.m3u8
+https://c7.lbaa.pw:8081/lb/disney/1/www.tvpinto.com/c10/1702458061/E3ambygR5gcMXvi8Us2mBw/11721.m3u8
 
 #EXTINF:-1,Disney Channel1
-https://s6.hopslan.com/disneyc/tracks-v1a1/mono.m3u8?token=%2A
+#https://s6.hopslan.com/disneyc/tracks-v1a1/mono.m3u8?token=%2A
+https://s6.hopslan.com/disneyx1/index.m3u8
 
 #EXTINF:-1,Disney Channel2
 #EXTARGS1: -headers Referer:https://www.livestreamde.com/
