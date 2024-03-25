@@ -20,6 +20,7 @@ xparam = {
     "h": 500,
     "port": 0,
     "txtDir": r"%USERPROFILE%\Videos",
+    "txtFileExt": ".ts",
     "txtPlayer": r"C:\Program Files\DAUM\PotPlayer\PotPlayerMini64.exe",
     "txtOffset": "15",
     "txtDefaultDuration": "150",
@@ -164,7 +165,7 @@ def doCreate(chan, mode, start, end, title, useMaps, fullTimeshift):
         if tend < now: tend = now + timedelta(minutes=6)
         
         taskname = HandleM3u.toFilename(f'Rec_{tstart.isoformat()}_{chan} - {title}')
-        destfile = f'{xparam["txtDir"]}\\{taskname}.ts'
+        destfile = f'{xparam["txtDir"]}\\{taskname}{xparam["txtFileExt"]}'
         folder = "\\Record"
         exe = "cmd.exe"
         args = f'/s /c ""{fncmd}" "{url}" "{destfile}" mode_{mode} "{args1}" "{args2}""'

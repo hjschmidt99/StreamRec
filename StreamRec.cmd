@@ -7,7 +7,7 @@
 :: %5 : arguments after -1, e.g. stream maps
 :::::::::::::::::::::::::::::::
 set ffmpeg="D:\Programme\ffmpeg\bin\ffmpeg.exe"
-set args1=-http_persistent 0 -analyzeduration 15000000 -ignore_unknown
+set args1=-http_persistent 0 -analyzeduration 15000000 -ignore_unknown -hide_banner
 set ffmpeg1=%ffmpeg% %args1%
 set x264=-c:v libx264 -profile:v high -pix_fmt yuv420p -movflags +faststart -g 25 -bf 2
 set aac=-acodec aac -ar 44100 -ac 2 -profile:a 1
@@ -42,7 +42,7 @@ goto end
 ::set ffmpeg2=%ffmpeg% %args1% -reconnect 1 -reconnect_streamed 1 -reconnect_on_network_error 1 -reconnect_delay_max 2
 ::set ffmpeg2=%ffmpeg% %args1% -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 2
 ::%ffmpeg2% -i %1 -c copy %fn%
-%ffmpeg2% -i %1 -c copy -map 0:v:3 -map 0:a:0 -map 0:a:5 %fn% 2>&1 | find /V "Skip ("
+%ffmpeg1% -i %1 -c copy -map 0:v:3 -map 0:a:0 -map 0:a:5 %fn% 2>&1 | find /V "Skip ("
 goto exit
 
 :end

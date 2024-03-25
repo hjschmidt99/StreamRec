@@ -1,3 +1,12 @@
+##############################################
+## Handle/decode m3u8 responses
+## 
+## sample line to decode: <tag>:list of key/value pairs seperated by comma
+## #EXT-X-STREAM-INF:CODECS="avc1.640028,mp4a.40.2",BANDWIDTH=4504154,AVERAGE-BANDWIDTH=3544154,\n
+##   AUDIO="A1.1+A2.1+A3.1-510682780",SUBTITLES="T1-510682780",FRAME-RATE=50.000,RESOLUTION=1280x720
+## 
+##############################################
+
 import sys
 import os
 import urllib.request
@@ -50,15 +59,15 @@ def decodeM3u(url, chan = "Channel"):
     p = download(url)
     p1 = p.splitlines()
     baseUrl = url.rsplit("/", 1)[0] + "/"
-    tagStram = "#EXT-X-STREAM-INF:"
+    tagStream = "#EXT-X-STREAM-INF:"
     tagMedia = "#EXT-X-MEDIA:"
     items = { "CHANNEL": chan, "URL": url }
 
     for ix1, x1 in enumerate(p1):
         s1 =  {}
 
-        if x1.startswith(tagStram):
-            t1 = x1.partition(tagStram)[2]
+        if x1.startswith(tagStream):
+            t1 = x1.partition(tagStream)[2]
             s1 = toDict(t1)
             s1["URL"] = absurl(p1[ix1 + 1], baseUrl)
             s1 = { "TYPE": "VIDEO" } | s1

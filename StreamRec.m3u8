@@ -60,8 +60,8 @@ https://tagesschau.akamaized.net/hls/live/2020115/tagesschau/tagesschau_1/master
 https://zdf-hls-17.akamaized.net/hls/live/2016500/de/high/master.m3u8
 
 #EXTINF:-1,ZDFneo
-#EXTARGS2: -map 0:v:0 -map 0:a:0 -map 0:a:1 
-###EXTARGS2: -map 0:v:0 -map 0:a 
+###EXTARGS2: -map 0:v:0 -map 0:a:0 -map 0:a:1 
+#EXTARGS2: -map 0:v:0 -map 0:a 
 https://zdf-hls-16.akamaized.net/hls/live/2016499/de/veryhigh/master.m3u8
 
 #EXTINF:-1,DW
@@ -148,7 +148,8 @@ https://brevent.akamaized.net/hls/live/2028222/event_05/master.m3u8
 #EXTINF:-1,Disney Channel
 #https://s6.hopslan.com/disneyc/tracks-v1a1/mono.m3u8?token=%2A
 #https://s6.hopslan.com/disneyx1/tracks-v1a1/mono.m3u8
-https://c7.lbaa.pw:8081/lb/disney/1/www.tvpinto.com/c10/1702458061/E3ambygR5gcMXvi8Us2mBw/11721.m3u8
+#https://c7.lbaa.pw:8081/lb/disney/1/www.tvpinto.com/c10/1702458061/E3ambygR5gcMXvi8Us2mBw/11721.m3u8
+https://helpfulpost.net/disney/index.m3u8?token=dffcf4331d875077ba15d55701c33e87158acb2b-a77d831be4afa56de73771b7916b7d13-1711282843-1711272043
 
 #EXTINF:-1,Disney Channel1
 #https://s6.hopslan.com/disneyc/tracks-v1a1/mono.m3u8?token=%2A
@@ -218,14 +219,10 @@ https://s6.hopslan.com/vivac/tracks-v1a1/mono.m3u8?token=%2A
 https://s6.hopslan.com/nick/index.m3u8?token=*
 
 #EXTINF:-1,ORF eins
-https://s6.hopslan.com/orf1/index.m3u8
+https://s6.hopslan.com/orfx1/tracks-v1a1/mono.m3u8?token=0843844d6a1ed3b28cb43af25847f2707632ce17-61063605d1fee0d0764c80193b12d453-1710541631-1710530831
 
 #EXTINF:-1,ORF 2
 https://s6.hopslan.com/orf2/index.m3u8
-
-
-
-
 
 #EXTINF:-1,MovieSphere
 https://moviesphere-plex.amagi.tv/playlist.m3u8
@@ -265,4 +262,25 @@ https://d46c0ebf9ef94053848fdd7b1f2f6b90.mediatailor.eu-central-1.amazonaws.com/
 
 #EXTINF:-1,PlutoMovies
 https://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/v2/stitch/hls/channel/5c5c3b948002db3c3e0b262e/3063648/playlist.m3u8?terminate=false&sid=ee5b0ef6-888c-11ee-bc48-462b00993e33&deviceDNT=0&deviceLat=49.9&deviceLon=8.6797&deviceModel=web&deviceVersion=119.0.0&gdpr=1&gdprConsent=CPpg95tPpg96NAcABBENDcCgALCAAEJAACiQIcgZ5C5ETWlDKPh9A_s0WYAHVlwQAeAiCgCBACAFCAAAIAYABCAgoAQAACACOAAAIAIAAAIEAAAEAEAAQAAAAAFAAAAAgAAIIABAAAEAAAAAAAIAgAQAAAAAAAAREAAAiAgAAkKEQEAAQAAQAAAAgIAAAAAEAgMAAAAAQAIAAAAAAgAAAAAAAAIIcgBgChETQFAKMhNAHEUCAAQVhAQAKAiCACBAAAECAAAIAYAFCAggAAAAAAAOAAAIAAAAAAAAAAEAEAAQAAAAABAAAAAAAAIAABAAAEAAAAAAAAAgAAAAAAAAAAQAAAAgQBAAAIEQEAAQAAQAAAAgAAAAAAAAAMAAAAAAAAAAAAAAgAAAAAAAAICAQBQAAaABgAGgAQgAuADAAJAAWgAvgByAHQAPwAjABOAChAFoAW4AwgDFAGUAbAA5QCAAIIARkAjwCQAFEAKQAXIAygBxAEJAMyAaABDYCLwFQAL3AX-AxQBjYDIAG5gOYAdCA6kB5gUAiAAqAE4AUAAqAB6AFIALwArQBwAEIAI6ASuAroCvgJaAYyA04BtYDqgwAgAAwATwAtgCkAOoAhsBF4CWhAAgAAwAJAAngBbAFIAhsBF4CWhUAEAIYoAEAKQAZQyACAEMYABAFIOAXwAGAAeABgAGgAQAAwACQAFoALwAdABGACcAFCALQAtwBeAGEAMoAbAA3ABygECAQQAhABGACOAEgAKIAUgAuQBqgDiAISASUApoBWQDMgGgAP0AhsBbwC9wF_gMRAYoAxsBkADcwHMAOhAeYA9keAPAAVACcAKAAVAA9ACkAK0AcABK4CugK-AfwBLQDGQGnANrgdSB1RAAiAAeAL4AwgCkAFuANUAcQBCQCsgGZAP0AtoBbwC9wGKAMgAbmA5giAIABUAOAAlcBXQFfAP4AloBtcDqQOqJACwADAAXAByAF8AQgApACEgFZAMyAloBSZKAeAAsADgARAAmABcADFAIYAiQBHACjAFuAdQBF4CRAF5gQBKAJwADgANAAgABgAEgALQAdABGgC8AMIAZQA2QBvAHKAQABBACEAEYAJAASwAogBSADiAIQASUAloBTQCsgGBAMyAaAA_QCNQF7gL_AYoA3MBzADoYHUgdUA8wCHJUAXACcAKAAVACtAJXAV0BXwEtALWAYyAyABpwDawA.dhAACEgAAAAA&includeExtendedEvents=true&appName=web&DRMCapabilities=widevine&deviceId=938554ab-aa7e-4ecd-b75d-4e80d998fd0d&appVersion=7.8.1-7ed0d2934d67fff986332da63a4eb45c87683638&deviceType=web&deviceMake=firefox&jwt=eyJhbGciOiJIUzI1NiIsImtpZCI6IjY2YmIwNjM3LThmNDEtNDk0OC04OTQwLTQ0NWMyNmRmOGI5MSIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSUQiOiJlZTViMGVmNi04ODhjLTExZWUtYmM0OC00NjJiMDA5OTNlMzMiLCJjbGllbnRJUCI6IjJhMDI6OTA4OmRmNTg6ZWI2MDo6YjFiZCIsImNpdHkiOiJEYXJtc3RhZHQiLCJwb3N0YWxDb2RlIjoiNjQyODkiLCJjb3VudHJ5IjoiREUiLCJkbWEiOjAsImFjdGl2ZVJlZ2lvbiI6IkRFIiwiZGV2aWNlTGF0Ijo0OS45LCJkZXZpY2VMb24iOjguNjc5NywicHJlZmVycmVkTGFuZ3VhZ2UiOiJkZSIsImRldmljZVR5cGUiOiJ3ZWIiLCJkZXZpY2VWZXJzaW9uIjoiMTE5LjAuMCIsImRldmljZU1ha2UiOiJmaXJlZm94IiwiZGV2aWNlTW9kZWwiOiJ3ZWIiLCJhcHBOYW1lIjoid2ViIiwiYXBwVmVyc2lvbiI6IjcuOC4xLTdlZDBkMjkzNGQ2N2ZmZjk4NjMzMmRhNjNhNGViNDVjODc2ODM2MzgiLCJjbGllbnRJRCI6IjkzODU1NGFiLWFhN2UtNGVjZC1iNzVkLTRlODBkOTk4ZmQwZCIsImNtQXVkaWVuY2VJRCI6IiIsImlzQ2xpZW50RE5UIjpmYWxzZSwidXNlcklEIjoiIiwibG9nTGV2ZWwiOiJERUZBVUxUIiwidGltZVpvbmUiOiJFdXJvcGUvQmVybGluIiwic2VydmVyU2lkZUFkcyI6ZmFsc2UsImUyZUJlYWNvbnMiOmZhbHNlLCJmZWF0dXJlcyI6eyJpc1N0aXRjaGVyRWtzIjp0cnVlLCJtdWx0aVBvZEFkcyI6eyJlbmFibGVkIjp0cnVlfX0sImZtc1BhcmFtcyI6eyJmd1ZjSUQyIjoiOTM4NTU0YWItYWE3ZS00ZWNkLWI3NWQtNGU4MGQ5OThmZDBkIiwiZndWY0lEMkNvcHBhIjoiOTM4NTU0YWItYWE3ZS00ZWNkLWI3NWQtNGU4MGQ5OThmZDBkIiwiY3VzdG9tUGFyYW1zIjp7ImZtc19saXZlcmFtcF9pZGwiOiIiLCJmbXNfZW1haWxoYXNoIjoiIiwiZm1zX3N1YnNjcmliZXJpZCI6IiIsImZtc19pZmEiOiIiLCJmbXNfaWRmdiI6IiIsImZtc191c2VyaWQiOiI5Mzg1NTRhYi1hYTdlLTRlY2QtYjc1ZC00ZTgwZDk5OGZkMGQiLCJmbXNfdmNpZDJ0eXBlIjoidXNlcmlkIiwiZm1zX3JhbXBfaWQiOiIiLCJmbXNfaGhfcmFtcF9pZCI6IiIsImZtc19iaWRpZHR5cGUiOiIiLCJfZndfM1BfVUlEIjoiIiwiZm1zX3J1bGVpZCI6IjEwMDAwLDEwMDA5LDEwMDAzIn19LCJkcm0iOnsibmFtZSI6IndpZGV2aW5lIiwibGV2ZWwiOiJMMyJ9LCJpc3MiOiJib290LnBsdXRvLnR2Iiwic3ViIjoicHJpOnYxOnBsdXRvOmRldmljZXM6REU6T1RNNE5UVTBZV0l0WVdFM1pTMDBaV05rTFdJM05XUXROR1U0TUdRNU9UaG1aREJrIiwiYXVkIjoiKi5wbHV0by50diIsImV4cCI6MTcwMDY3MTMzNywiaWF0IjoxNzAwNTg0OTM3LCJqdGkiOiI0OGI1NzNhZS00ZTViLTQ2YjUtODYzNS1iNDg2NmE0OThiMzEifQ.BuhtsWJB-jMrbtRMLY78pKUOwdz52UlzCNi2XLZRhGc&CMCD=mtp%3D150500%2Cot%3Dm%2Csf%3Dh%2Csid%3D%229cc88236-20cf-45cb-aab1-93c8ae2e218e%22
+
+
+
+#EXTINF:-1,HIT TV
+http://5.56.0.181/HIT_TV/tracks-v1a1/mono.m3u8
+#EXTINF:-1,K POP TV
+https://250weu.bozztv.com/ssh101/ssh101/kpoptv/chunks.m3u8
+#EXTINF:-1,DORCEL TV
+http://146.59.54.163:80/359/mono.m3u8
+#EXTINF:-1,EXXXOTICA
+http://146.59.54.163:80/362/mono.m3u8
+#EXTINF:-1,REDLIGHT HD
+http://51.159.102.100/RedlightHD/index.m3u8
+#EXTINF:-1,BABE STATION 24
+https://sdn-global-live-streaming-packager-cache.3qsdn.com/9528/655e8a6fd3714_12812337_2311221110_720p.m3u8
+#EXTINF:-1,JENNY FOR YOU
+https://59ec5453559f0.streamlock.net/JennyForYou/smil:WEB3131/chunklist_w435400082_b1896000.m3u8
+#EXTINF:-1,KALOOPY
+https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/kaloopy/c02c9f82-fcc3-4ec2-9fb1-6169ce54e935/2.m3u8
+#EXTINF:-1,VISIT X TV
+https://stream.visit-x.tv/vxtv/ngrp:live_all/chunklist_w581134728_b3203072.m3u8
 
